@@ -1,0 +1,16 @@
+[
+    {
+        "idDireccion": 1,
+        "calle": "Cordoba",
+        "altura": "1674",
+        "provincia": "Buenos Aires",
+        "ciudad": "Mar del Plata"
+    },
+    {
+        "idDireccion": 2,
+        "calle": "Avenida Corrientes",
+        "altura": "3058",
+        "provincia": "Buenos Aires",
+        "ciudad": "Capital Federal"
+    }
+]

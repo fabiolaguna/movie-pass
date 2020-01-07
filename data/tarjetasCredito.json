@@ -1,0 +1,12 @@
+[
+    {
+        "nombreCompania": "Visa",
+        "nroTarjeta": "1111111111111111",
+        "codigoSeguridad": "111"
+    },
+    {
+        "nombreCompania": "MasterCard",
+        "nroTarjeta": "2222222222222222",
+        "codigoSeguridad": "222"
+    }
+]

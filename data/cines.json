@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "idDireccion": 1,
+        "nombre": "Ambassador",
+        "capacidad": 100,
+        "precio": "310",
+        "baja": false
+    },
+    {
+        "id": 2,
+        "idDireccion": 2,
+        "nombre": "Hoyts",
+        "capacidad": 200,
+        "precio": "300",
+        "baja": false
+    }
+]

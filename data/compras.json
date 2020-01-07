@@ -1,0 +1,29 @@
+[
+    {
+        "idCompra": 1,
+        "tarjetaCredito": 1,
+        "idCliente": 1,
+        "cantEntradas": "3",
+        "descuento": "0",
+        "fecha": "2019-11-21",
+        "total": "900"
+    },
+    {
+        "idCompra": 2,
+        "tarjetaCredito": 2,
+        "idCliente": 1,
+        "cantEntradas": "2",
+        "descuento": "0",
+        "fecha": "2019-11-21",
+        "total": "600"
+    },
+    {
+        "idCompra": 3,
+        "tarjetaCredito": 2,
+        "idCliente": 1,
+        "cantEntradas": "2",
+        "descuento": "150",
+        "fecha": "2019-11-21",
+        "total": "450"
+    }
+]

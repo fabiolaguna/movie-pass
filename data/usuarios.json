@@ -1,0 +1,24 @@
+[
+    {
+        "email": "fabiolaguna.94@gmail.com",
+        "pass": "fabiocapo",
+        "rol": "cliente",
+        "baja": false,
+        "perfilUser": {
+            "nombre": "Fabio",
+            "apellido": "Laguna",
+            "dni": "38057871"
+        }
+    },
+    {
+        "email": "fede.alesandro@gmail.com",
+        "pass": "fedecapo",
+        "rol": "admin",
+        "baja": false,
+        "perfilUser": {
+            "nombre": "Federico",
+            "apellido": "Alesandro",
+            "dni": "42454677"
+        }
+    }
+]
