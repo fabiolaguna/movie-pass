@@ -1,7 +1,0 @@
-poner tipo para que el usuario modifique sus datos
-api de ML 
-en consulta de ventas que sea por peliculas que estan en proyecciones y no por peliculas
-
-prioridades:
--eliminar las entradas cuando eliminas proyecciones que todavia no pasaron (se tendria que dar algun aviso a los clientes que se elimino la proyeccion)
--
