@@ -42,6 +42,20 @@ class EntradaDao implements IDao
         else
             return false;
     }
+    public function readProyeccion($idProyeccion)
+    {
+        $sql = "SELECT * FROM entradas where idProyeccion = $idProyeccion";
+        try {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql); //Sino va execute($sql, $parameters);
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+        if (!empty($resultSet))
+            return $this->mapear($resultSet);
+        else
+            return false;
+    }
     public function getAll()
     {
         $sql = "SELECT * FROM entradas";
@@ -62,7 +76,7 @@ class EntradaDao implements IDao
     }
     public function delete($idEntrada)
     {
-        $sql = "DELETE FROM entradas WHERE idEntrada = $idEntrada";
+        $sql = "UPDATE entradas SET baja = true where idEntrada = $idEntrada";
         try {
             $this->connection = Connection::getInstance();
             return $this->connection->ExecuteNonQuery($sql);

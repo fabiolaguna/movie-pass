@@ -2,6 +2,8 @@
 
 namespace daojson;
 
+use PHPMailer\PHPMailer\PHPMailer;
+
 use interfaces\IDao as IDao;
 use models\Proyeccion as Proyeccion;
 use controllers\SalaController as SalaController;
@@ -18,7 +20,7 @@ class ProyeccionDao implements IDao
 
     public function add($proyeccion) //Fijarse que no este repetido y si esta eliminado, nomas cambiar baja a true
     {
-        $this->proyeccionesList=array();
+        $this->proyeccionesList = array();
         $this->retrieveData();
         $proyeccionExist = false;
         $sala = SalaController::readSala($proyeccion->getIdSala());
@@ -67,9 +69,9 @@ class ProyeccionDao implements IDao
         if (!$proyeccionExist) {
             $id = 0;
             if ($this->proyeccionesList != null)
-                $id = count($this->proyeccionesList);
-            $id = $id + 1;
-            $proyeccion->setIdProyeccion($id);
+                $cant = count($this->proyeccionesList);
+            $id=$this->proyeccionesList[$cant-1]->getIdProyeccion();
+            $proyeccion->setIdProyeccion($id+1);
             array_push($this->proyeccionesList, $proyeccion);
             $this->saveData();
             $successMje = 'Agregado con éxito';
@@ -81,7 +83,7 @@ class ProyeccionDao implements IDao
     }
     public function read($idProyeccion)
     {
-        $this->proyeccionesList=array();
+        $this->proyeccionesList = array();
         $this->retrieveData();
         $value = null;
         foreach ($this->proyeccionesList as $proyeccion) {
@@ -92,14 +94,71 @@ class ProyeccionDao implements IDao
     }
     public function getAll()
     {
-        $this->proyeccionesList=array();
+        $this->proyeccionesList = array();
         $this->retrieveData();
         return $this->proyeccionesList;
     }
 
     public function delete($idProyeccion)
     {
-        $this->proyeccionesList=array();
+        $proyeccion = $this->read($idProyeccion);
+        if ($proyeccion->getFecha() > date('Y-m-d')) {
+            $entradaDao = new EntradaDao();
+            $entradas = $entradaDao->getAll();
+            $entradasEliminar = array();
+            if (!empty($entradas)) {
+                if (is_array($entradas)) {
+                    foreach ($entradas as $value) {
+                        if ($value->getIdProyeccion() == $idProyeccion)
+                            array_push($entradasEliminar, $value);
+                    }
+                } else {
+                    if ($entradas->getIdProyeccion() == $idProyeccion)
+                        array_push($entradasEliminar, $entradas);
+                }
+            }
+            if (!empty($entradasEliminar)) {
+                foreach ($entradasEliminar as $value) {
+                    $entradaDao->delete($value->getIdEntrada());
+
+                    $mail = new PHPMailer(true);
+                    //Server settings
+                    //Enable SMTP debugging
+                    // 0 = off (for production use)
+                    // 1 = client messages
+                    // 2 = client and server messages
+                    $mail->isSMTP();                                            // Send using SMTP
+                    $mail->SMTPDebug = 0;
+                    //Ask for HTML-friendly debug output
+                    $mail->Host       = "smtp.gmail.com";                    // Set the SMTP server to send through
+                    $mail->SMTPAuth = true;
+                    $mail->Username   = "moviepassxd@gmail.com";                     // SMTP username
+                    $mail->Password   = "fedeyfabio";                               // SMTP password
+                    $mail->SMTPSecure = 'tls';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+                    $mail->Port       = '587';                                    // TCP port to connect to
+                    $mail->CharSet = 'UTF-8';
+
+                    //Recipients
+                    $mail->setFrom('moviepassxd@gmail.com', 'Movie Pass');
+                    $mail->addAddress($_SESSION["loggedEmail"]); // Name is optional
+                    // Content
+                    $mail->isHTML(true);                                  // Set email format to HTML
+                    $mail->Subject = 'Entrada cine';
+                    $mail->Body    = "Se adjunta la informacion de la compra con un codigo qr que debera presentar al momento de entrar a la funcion" . "<br>" . "<br>"  .
+                        "Número de entrada: " . $entrada->getIdEntrada() . "<br>" .
+                        "<br>" . "Cine: " . $cine->getNombre() .
+                        "<br>" . "Sala: " . $sala->getNombre() .
+                        "<br>" . "Pelicula: " . $pelicula->getNombrePelicula() .
+                        "<br>" . "Precio: " . $precio .
+                        "<br>" . "Fecha: " . $proyeccion->getFecha() .
+                        "<br>" . "Horario: " . $proyeccion->getHorario() .
+                        "<br>" . $entrada->getCodigoQR();
+                    $mail->send();
+                }
+            }
+        }
+
+        $this->proyeccionesList = array();
         $this->retrieveData();
         $i = 0;
         foreach ($this->proyeccionesList as $key => $proyeccion) {
@@ -111,7 +170,7 @@ class ProyeccionDao implements IDao
 
     public function update($proyeccion, $idProyeccion)
     {
-        $this->proyeccionesList=array();
+        $this->proyeccionesList = array();
         $this->retrieveData();
         $msg = null;
         $arrayProyecciones = $this->proyeccionesList;
@@ -195,7 +254,7 @@ class ProyeccionDao implements IDao
     }
     public function updateAsientos($asientosDisponibles, $asientosOcupados, $idProyeccion)
     {
-        $this->proyeccionesList=array();
+        $this->proyeccionesList = array();
         $this->retrieveData();
 
         $i = 0;

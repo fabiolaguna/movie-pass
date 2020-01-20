@@ -4,6 +4,7 @@ namespace models;
 
 class Usuario
 {
+    private $idUsuario;
     private $email;
     private $contrasenia;
     private $perfilUsuario;
@@ -12,6 +13,7 @@ class Usuario
 
     function __construct($email=null, $contrasenia=null, $perfilUsuario=null, $rol=null)
     {
+        $this->idUsuario = null;
         $this->email = $email;
         $this->contrasenia = $contrasenia;
         $this->perfilUsuario = $perfilUsuario;
@@ -19,6 +21,10 @@ class Usuario
         $this->baja = false;
     }
 
+    public function getIdUsuario()
+    {
+        return $this->idUsuario;
+    }
     public function getEmail()
     {
         return $this->email;
@@ -40,6 +46,10 @@ class Usuario
         return $this->baja;
     }
 
+    public function setIdUsuario($idUsuario)
+    {
+        $this->idUsuario = $idUsuario;
+    }
     public function setEmail($email)
     {
         $this->email = $email;

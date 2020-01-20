@@ -82,7 +82,7 @@ class CompraDao implements IDao
     }
     public function delete($idCompra)
     {
-        $sql = "DELETE FROM compras WHERE idCompra = $idCompra";
+        $sql = "UPDATE compras SET baja = true WHERE idCompra = $idCompra"; 
         try {
             $this->connection = Connection::getInstance();
             return $this->connection->ExecuteNonQuery($sql);

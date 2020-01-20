@@ -9,6 +9,7 @@ class PagoTC
     private $codigoAut;
     private $fecha;
     private $total;
+    private $baja;
 
     function __construct($idCompra, $codigoAut, $fecha, $total)
     {
@@ -17,6 +18,7 @@ class PagoTC
         $this->codigoAut = $codigoAut;
         $this->fecha = $fecha;
         $this->total = $total;
+        $this->baja = false;
     }
 
     public function getIdPagoTC()
@@ -39,6 +41,10 @@ class PagoTC
     {
         return $this->total;
     }
+    public function getBaja()
+    {
+        return $this->baja;
+    }
 
     public function setIdPagoTC($idPagoTC)
     {
@@ -59,5 +65,9 @@ class PagoTC
     public function setTotal($total)
     {
         $this->total = $total;
+    }
+    public function setBaja($baja)
+    {
+        $this->baja = $baja;
     }
 }

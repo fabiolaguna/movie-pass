@@ -3,8 +3,6 @@
 namespace controllers;
 
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
 
 use models\Compra as Compra;
 use models\Entrada as Entrada;

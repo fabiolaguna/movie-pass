@@ -9,6 +9,7 @@ class Entrada
     private $idCliente;
     private $idCompra;
     private $codigoQR;
+    private $baja;
 
     function __construct($idProyeccion, $idCliente, $idCompra)
     {
@@ -17,6 +18,7 @@ class Entrada
         $this->idCliente = $idCliente;
         $this->idCompra = $idCompra;
         $this->codigoQR = null;
+        $this->baja = false;
     }
 
     public function getIdEntrada()
@@ -38,6 +40,10 @@ class Entrada
     public function getCodigoQR()
     {
         return $this->codigoQR;
+    }
+    public function getBaja()
+    {
+        return $this->baja;
     }
 
     public function setIdEntrada($idEntrada)
@@ -63,5 +69,9 @@ class Entrada
     public function setCodigoQRMail($mensajeCodigoQr)
     {
         $this->codigoQR='<img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=Puede ingresar al cine. ' . $mensajeCodigoQr . '" title="Acceso al cine"/>';  
+    }
+    public function setBaja($baja)
+    {
+        $this->baja=$baja;  
     }
 }

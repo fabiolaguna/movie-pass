@@ -268,24 +268,30 @@ class ProyeccionDao implements IDao
 
     public function delete($idProyeccion)
     {
-        /*$entradaDao = new EntradaDao();
-        $entradas = $entradaDao->getAll();
-        $entradasEliminar = array();
-        if (!empty($entradas)) {
-            if (is_array($entradas)) {
-                foreach ($entradas as $value) {
-                    if ($value->getIdProyeccion() == $idProyeccion)
-                        array_push($entradasEliminar, $value);
+        $proyeccion=$this->read($idProyeccion);
+        if($proyeccion->getFecha() > date('Y-m-d'))
+        {
+            $entradaDao = new EntradaDao();
+            $entradas = $entradaDao->getAll();
+            $entradasEliminar = array();
+            if (!empty($entradas)) {
+                if (is_array($entradas)) {
+                    foreach ($entradas as $value) {
+                        if ($value->getIdProyeccion() == $idProyeccion)
+                            array_push($entradasEliminar, $value);
+                    }
+                } else {
+                    if ($entradas->getIdProyeccion() == $idProyeccion)
+                        array_push($entradasEliminar, $entradas);
                 }
-            } else {
-                if ($entradas->getIdProyeccion() == $idProyeccion)
-                    array_push($entradasEliminar, $entradas);
             }
-        }
+            if (!empty($entradasEliminar)) {
+                foreach ($entradasEliminar as $value) {
+                    $entradaDao->delete($value->getIdEntrada());
+                }
+            }
+        }       
 
-        foreach ($entradasEliminar as $value) {
-            $entradaDao->delete($value->getIdEntrada());
-        }*/
         $sql = "DELETE FROM proyecciones WHERE idProyeccion = $idProyeccion";
 
         try {

@@ -11,6 +11,7 @@ class Proyeccion
     private $asientosOcupados;
     private $fecha;
     private $horario;
+    private $baja;
 
     function __construct($idSala, $idPelicula, $asientosDisponibles, $asientosOcupados, $fecha, $horario)
     {
@@ -21,6 +22,7 @@ class Proyeccion
         $this->asientosOcupados = $asientosOcupados;
         $this->fecha = $fecha;
         $this->horario = $horario;
+        $this->baja = false;
     }
 
     public function getIdProyeccion()
@@ -51,6 +53,10 @@ class Proyeccion
     {
         return $this->horario;
     }
+    public function getBaja()
+    {
+        return $this->baja;
+    }    
 
     public function setIdProyeccion($idProyeccion)
     {
@@ -79,5 +85,9 @@ class Proyeccion
     public function setHorario($horario)
     {
         $this->horario = $horario;
+    }
+    public function setBaja($baja)
+    {
+        $this->baja = $baja;
     }
 }

@@ -55,7 +55,7 @@ class CompraDao implements IDao
         $this->retrieveData();
         foreach ($this->comprasList as $key => $compra) {
             if ($compra->getIdCompra() == $idCompra)
-                unset($this->comprasList[$key]);
+                $compra->setBaja(true);
         }
         $this->saveData();
     }

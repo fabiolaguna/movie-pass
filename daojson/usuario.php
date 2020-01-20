@@ -56,6 +56,21 @@ class Usuario implements IDao
         }
         return $value;
     }
+    public function readEmail($idUsuario)
+    {
+        $this->usersList=array();
+        $this->retrieveData();
+        $value=null;
+        $id=1;
+        foreach($this->usersList as $user)
+        {
+            if($user->getEmail()==$email)   
+                $value=$id;      
+            $id++;
+            $idUsuario=$id que haga getemail
+        }
+        return $value;
+    }
     public function readIdUsuario($email)
     {
         $this->usersList=array();

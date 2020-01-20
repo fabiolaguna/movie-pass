@@ -50,6 +50,7 @@
                                 unset($_SESSION["proyecciones"]);
                             }
                             if ($arrayProyecciones != null) {
+                                $entradaDao = new daoDB\EntradaDao();
                                 $i = 0;
                                 $cantProyecciones = count($arrayProyecciones);
                                 while ($i < $cantProyecciones) {
@@ -70,10 +71,16 @@
                                         <td>
                                             <a class="btn btn-danger btn-sm" href="<?php echo (FRONT_ROOT); ?>/proyeccion/eliminarProyeccion?idProyeccion=<?php echo ($arrayProyecciones[$i]->getIdProyeccion()); ?>" onclick="clicked(event)">Eliminar</a>
                                         </td>
-                                        <td>
-                                            <a class="btn btn-primary btn-sm" href="<?php echo (FRONT_ROOT); ?>/proyeccion/index?idProyeccion=<?php echo ($arrayProyecciones[$i]->getIdProyeccion()); ?>">Modificar</a>
-                                        </td>
-                                        <?php $i++; ?>
+                                        <?php 
+                                            $entrada = $entradaDao->readProyeccion($arrayProyecciones[$i]->getIdProyeccion());
+                                            if($entrada == false)
+                                            {
+                                        ?>
+                                            <td>
+                                                <a class="btn btn-primary btn-sm" href="<?php echo (FRONT_ROOT); ?>/proyeccion/index?idProyeccion=<?php echo ($arrayProyecciones[$i]->getIdProyeccion()); ?>">Modificar</a>
+                                        <?php } else {
+                                            ?> <td hidden> <?php
+                                        } ?> </td> <?php $i++; ?>
                                     </tr>
                             <?php }
                             } else {

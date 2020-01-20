@@ -55,7 +55,7 @@ class PagoTCDao implements IDao
         $this->retrieveData();
         foreach ($this->pagoList as $key => $pago) {
             if ($pago->getIdPagoTC() == $idPagoTC)
-                unset($this->pagoList[$key]);
+                $pago->setBaja(true);
         }
         $this->saveData();
     }

@@ -48,6 +48,18 @@ class EntradaDao implements IDao
         }
         return $value;
     }
+    
+    public function readProyeccion($idProyeccion)
+    {
+        $this->entradaList=array();
+        $this->retrieveData();
+        $value = false;
+        foreach ($this->entradaList as $entrada) {
+            if ($entrada->getIdProyeccion() == $idProyeccion)
+                $value = $entrada;
+        }
+        return $value;
+    }
 
     public function delete($idEntrada) 
     {
@@ -55,7 +67,7 @@ class EntradaDao implements IDao
         $this->retrieveData();
         foreach ($this->entradaList as $key => $entrada) {
             if ($entrada->getIdEntrada() == $idEntrada)
-                unset($this->entradaList[$key]);
+                $entrada->setBaja(true);
         }
         $this->saveData();
     }

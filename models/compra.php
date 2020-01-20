@@ -11,6 +11,7 @@ class Compra
     private $descuento;
     private $fecha;
     private $total;
+    private $baja;
 
     function __construct($idTarjetaCredito, $idCliente, $cantEntradas, $descuento, $fecha, $total)
     {
@@ -21,6 +22,7 @@ class Compra
         $this->descuento = $descuento;
         $this->fecha = $fecha;
         $this->total = $total;
+        $this->baja = false;
     }
 
     public function getIdCompra()
@@ -51,6 +53,10 @@ class Compra
     {
         return $this->total;
     }
+    public function getBaja()
+    {
+        return $this->baja;
+    }
 
     public function setIdCompra($idCompra)
     {
@@ -79,5 +85,9 @@ class Compra
     public function setTotal($total)
     {
         $this->total = $total;
+    }
+    public function setBaja($baja)
+    {
+        $this->baja = $baja;
     }
 }

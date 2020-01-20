@@ -62,7 +62,7 @@ class PagoTCDao implements IDao
     }
     public function delete($idPagoTC)
     {
-        $sql = "DELETE FROM pagoTC WHERE idPagoTC = $idPagoTC";
+        $sql = "UPDATE pagoTC SET baja = true WHERE idPagoTC = $idPagoTC";
         try {
             $this->connection = Connection::getInstance();
             return $this->connection->ExecuteNonQuery($sql);

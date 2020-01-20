@@ -89,6 +89,22 @@ class Usuario implements IDao
             throw $ex;
         }
     }
+
+    public function readEmail($idUsuario)
+    {
+        $sql = "SELECT email FROM usuarios where idUsuario = '$idUsuario'";
+        try {
+            $this->connection = Connection::getInstance();
+            $resultSet = $this->connection->execute($sql); //Sino va execute($sql, $parameters);
+            $resp = array_map(function ($p) {
+                $idUsuario = ($p['idUsuario']);
+                return $idUsuario;
+            }, $resultSet);
+            return (count($resp) > 1 ? $resp : $resp['0']);
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
     /**
      *
      */
@@ -148,6 +164,7 @@ class Usuario implements IDao
                 $user->setBaja(true);
             else
                 $user->setBaja(false);
+            $user->setIdUsuario($p['idUsuario']);
             return $user;
         }, $value);
         return $resp;
