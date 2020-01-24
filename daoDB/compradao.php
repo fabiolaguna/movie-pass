@@ -14,13 +14,18 @@ class CompraDao implements IDao
 
     public function add($compra)
     {
-        $sql = "INSERT INTO compras (idTarjetaCredito, idCliente, cantEntradas, descuento, fecha, total) VALUES (:idTarjetaCredito, :idCliente, :cantEntradas, :descuento, :fecha, :total)";
+        $sql = "INSERT INTO compras (idTarjetaCredito, idCliente, cantEntradas, descuento, fecha, total, baja) VALUES (:idTarjetaCredito, :idCliente, :cantEntradas, :descuento, :fecha, :total, :baja)";
         $parameters['idTarjetaCredito'] = $compra->getIdTarjetaCredito();
         $parameters['idCliente'] = $compra->getIdCliente();
         $parameters['cantEntradas'] = $compra->getCantEntradas();
         $parameters['descuento'] = $compra->getDescuento();
         $parameters['fecha'] = $compra->getFecha(); 
         $parameters['total'] = $compra->getTotal();
+        $baja = $compra->getBaja();
+            if ($baja)
+                $parameters['baja'] = 1;
+            else
+                $parameters['baja'] = 0;
         try {
             // creo la instancia connection
             $this->connection = Connection::getInstance();

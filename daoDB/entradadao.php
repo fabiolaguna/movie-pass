@@ -10,15 +10,21 @@ class EntradaDao implements IDao
     private $connection;
 
     function __construct()
-    { }
+    {
+    }
 
     public function add($entrada)
     {
-        $sql = "INSERT INTO entradas (idProyeccion, idCliente, idCompra, codigoQr) VALUES (:idProyeccion, :idCliente, :idCompra, :codigoQr)";
+        $sql = "INSERT INTO entradas (idProyeccion, idCliente, idCompra, codigoQr, baja) VALUES (:idProyeccion, :idCliente, :idCompra, :codigoQr, :baja)";
         $parameters['idProyeccion'] = $entrada->getIdProyeccion();
         $parameters['idCliente'] = $entrada->getIdCliente();
         $parameters['idCompra'] = $entrada->getIdCompra();
         $parameters['codigoQr'] = $entrada->getCodigoQR();
+        $baja = $entrada->getBaja();
+        if ($baja)
+            $parameters['baja'] = 1;
+        else
+            $parameters['baja'] = 0;
         try {
             // creo la instancia connection
             $this->connection = Connection::getInstance();
@@ -71,7 +77,7 @@ class EntradaDao implements IDao
             return false;
     }
     //no voy a editar una entrada
-    public function update($value = null, $value2 = null) 
+    public function update($value = null, $value2 = null)
     {
     }
     public function delete($idEntrada)

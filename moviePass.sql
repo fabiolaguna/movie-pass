@@ -54,9 +54,9 @@ create table proyecciones(
 	idPelicula int,
 	asientosDisponibles int,
     asientosOcupados int,
-    turno varchar (20), #trasnoche, etc
 	fecha date,
     horario varchar (6),
+    baja boolean,
     constraint pkIdProyeccion primary key (idProyeccion),
     constraint fk_IdSala foreign key (idSala) references salas(idSala)
 );
@@ -68,6 +68,7 @@ create table compras(
     descuento float,
     fecha date,
     total int,
+    baja boolean,
     constraint pkIdCompra primary key (idCompra),
     constraint fkIdTarjetaCredito foreign key (idTarjetaCredito) references tarjetasCredito (idTarjetaCredito),
     constraint fkIdCliente foreign key (idCliente) references clientes (idCliente)
@@ -78,6 +79,7 @@ create table entradas(
     idCliente int,
     idCompra int,
     codigoQr varchar(400),
+    baja boolean,
     constraint pkIdEntrada primary key (idEntrada),
     constraint fkIdProyeccion foreign key (idProyeccion) references proyecciones(idProyeccion),
 	constraint fkIdCompra foreign key (idCompra) references compras (idCompra),
@@ -89,6 +91,7 @@ create table pagoTC(
     codigoAut int,
     fecha date,
     total int,
+    baja boolean,
     constraint pkIdPago primary key (idPagoTC),
     constraint fkIdCompra foreign key (idCompra) references compras (idCompra)
 );

@@ -14,11 +14,16 @@ class PagoTCDao implements IDao
 
     public function add($pago)
     {
-        $sql = "INSERT INTO pagoTC (idCompra, codigoAut, fecha, total) VALUES (:idCompra, :codigoAut, :fecha, :total)";
+        $sql = "INSERT INTO pagoTC (idCompra, codigoAut, fecha, total, baja) VALUES (:idCompra, :codigoAut, :fecha, :total, :baja)";
         $parameters['idCompra'] = $pago->getIdCompra();
         $parameters['codigoAut'] = $pago->getCodigoAut();
         $parameters['fecha'] = $pago->getFecha(); 
         $parameters['total'] = $pago->getTotal();
+        $baja = $pago->getBaja();
+        if ($baja)
+            $parameters['baja'] = 1;
+        else
+            $parameters['baja'] = 0;
         try {
             // creo la instancia connection
             $this->connection = Connection::getInstance();

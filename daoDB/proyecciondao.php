@@ -94,7 +94,7 @@ class ProyeccionDao implements IDao
         }
 
         if (!$proyeccionExist) {
-            $sql = "INSERT INTO proyecciones (idSala, idPelicula, asientosDisponibles, asientosOcupados, fecha, horario) VALUES (:idSala, :idPelicula, :asientosDisponibles, :asientosOcupados, :fecha, :horario)";
+            $sql = "INSERT INTO proyecciones (idSala, idPelicula, asientosDisponibles, asientosOcupados, fecha, horario, baja) VALUES (:idSala, :idPelicula, :asientosDisponibles, :asientosOcupados, :fecha, :horario, :baja)";
             $parameters['idSala'] = $proyeccion->getIdSala();
             $parameters['idPelicula'] = $proyeccion->getIdPelicula();
             $sala = SalaController::readSala($proyeccion->getIdSala());
@@ -102,6 +102,11 @@ class ProyeccionDao implements IDao
             $parameters['asientosOcupados'] = $proyeccion->getAsientosOcupados();
             $parameters['fecha'] = $proyeccion->getFecha();
             $parameters['horario'] = $proyeccion->getHorario();
+            $baja = $proyeccion->getBaja();
+            if ($baja)
+                $parameters['baja'] = 1;
+            else
+                $parameters['baja'] = 0;
 
             try {
                 // creo la instancia connection
@@ -336,7 +341,7 @@ class ProyeccionDao implements IDao
             }
         }       
 
-        $sql = "DELETE FROM proyecciones WHERE idProyeccion = $idProyeccion";
+        $sql = "UPDATE proyecciones SET baja = true WHERE idProyeccion = $idProyeccion";
 
         try {
             // creo la instancia connection
