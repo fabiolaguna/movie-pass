@@ -2,9 +2,12 @@
 
 namespace daoDB;
 
+use PHPMailer\PHPMailer\PHPMailer;
+
 use interfaces\IDao as IDao;
 use models\Proyeccion as Proyeccion;
 use controllers\SalaController as SalaController;
+use controllers\PeliculaController as PeliculaController;
 
 class ProyeccionDao implements IDao
 {
@@ -288,6 +291,47 @@ class ProyeccionDao implements IDao
             if (!empty($entradasEliminar)) {
                 foreach ($entradasEliminar as $value) {
                     $entradaDao->delete($value->getIdEntrada());
+
+                    $userDao = new Usuario();
+                    $salaDao = new SalaDao();
+                    $cineDao = new CineDao();
+                    $mailUser = $userDao->readEmail($value->getIdCliente());
+                    $proyec = $this->read($value->getIdProyeccion());
+                    $sala = $salaDao->read($proyec->getIdSala());
+                    $cine = $cineDao->read($sala->getIdCine());
+                    $pelicula = PeliculaController::readPelicula($proyec->getIdPelicula());
+
+                    $mail = new PHPMailer(true);
+                    //Server settings
+                    //Enable SMTP debugging
+                    // 0 = off (for production use)
+                    // 1 = client messages
+                    // 2 = client and server messages
+                    $mail->isSMTP();                                            // Send using SMTP
+                    $mail->SMTPDebug = 0;
+                    //Ask for HTML-friendly debug output
+                    $mail->Host       = "smtp.gmail.com";                    // Set the SMTP server to send through
+                    $mail->SMTPAuth = true;
+                    $mail->Username   = "moviepassxd@gmail.com";                     // SMTP username
+                    $mail->Password   = "fedeyfabio";                               // SMTP password
+                    $mail->SMTPSecure = 'tls';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+                    $mail->Port       = '587';                                    // TCP port to connect to
+                    $mail->CharSet = 'UTF-8';
+
+                    //Recipients
+                    $mail->setFrom('moviepassxd@gmail.com', 'Movie Pass');
+                    $mail->addAddress($mailUser); // Name is optional
+                    // Content
+                    $mail->isHTML(true);                                  // Set email format to HTML
+                    $mail->Subject = 'Entrada cine';
+                    $mail->Body    = "Lamentamos informarle que por ciertos inconvenientes en la proyeccion de x pelicula en x cine, hemos eliminado la entrada que usted ha adquirido. El monto de la entrada sera retribuido a la cuenta con la que ha efectuado la compra." . "<br>" . "<br>"  .
+                        "Número de entrada: " . $value->getIdEntrada() . "<br>" .
+                        "<br>" . "Cine: " . $cine->getNombre() .
+                        "<br>" . "Sala: " . $sala->getNombre() .
+                        "<br>" . "Pelicula: " . $pelicula->getNombrePelicula() .
+                        "<br>" . "Fecha: " . $proyec->getFecha() .
+                        "<br>" . "Horario: " . $proyec->getHorario();
+                    $mail->send();
                 }
             }
         }       
@@ -311,6 +355,10 @@ class ProyeccionDao implements IDao
         $resp = array_map(function ($p) {
             $proyeccion = new Proyeccion($p['idSala'], $p['idPelicula'], $p['asientosDisponibles'], $p['asientosOcupados'], $p['fecha'], $p['horario']);
             $proyeccion->setIdProyeccion($p['idProyeccion']);
+            if ($p['baja'] == 1)
+                $proyeccion->setBaja(true);
+            else
+                $proyeccion->setBaja(false);
             return $proyeccion;
         }, $value);
         return count($resp) > 1 ? $resp : $resp['0'];

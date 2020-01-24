@@ -91,6 +91,10 @@ class EntradaDao implements IDao
             $entrada = new Entrada($p['idProyeccion'], $p['idCliente'], $p['idCompra']);
             $entrada->setIdEntrada($p['idEntrada']);
             $entrada->setCodigoQR($p['codigoQr']);
+            if ($p['baja'] == 1)
+                $entrada->setBaja(true);
+            else
+                $entrada->setBaja(false);
             return $entrada;
         }, $value);
         return count($resp) > 1 ? $resp : $resp['0'];

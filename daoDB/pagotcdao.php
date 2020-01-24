@@ -76,6 +76,10 @@ class PagoTCDao implements IDao
         $resp = array_map(function ($p) {
             $pago = new PagoTC($p['idCompra'], $p['codigoAut'], $p['fecha'], $p['total']);
             $pago->setIdPagoTC($p['idPagoTC']);
+            if ($p['baja'] == 1)
+                $pago->setBaja(true);
+            else
+                $pago->setBaja(false);
             return $pago;
         }, $value);
         return count($resp) > 1 ? $resp : $resp['0'];

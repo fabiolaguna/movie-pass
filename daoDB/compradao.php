@@ -96,6 +96,10 @@ class CompraDao implements IDao
         $resp = array_map(function ($p) {
             $compra = new Compra($p['idTarjetaCredito'], $p['idCliente'], $p['cantEntradas'], $p['descuento'], $p['fecha'], $p['total']);
             $compra->setIdCompra($p['idCompra']);
+            if ($p['baja'] == 1)
+                $compra->setBaja(true);
+            else
+                $compra->setBaja(false);
             return $compra;
         }, $value);
         return count($resp) > 1 ? $resp : $resp['0'];

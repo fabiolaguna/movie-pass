@@ -154,7 +154,9 @@ class SalaDao implements IDao
         if (!empty($arrayProyecciones)) {
             foreach ($arrayProyecciones as $proyeccion) {
                 if ($idSala == $proyeccion->getIdSala()) {
-                    $proyeccionDao->updateAsientosDisponibles($sala->getCapacidadButacas(), $proyeccion->getIdProyeccion());
+                    $asientosDisponibles = $sala->getCapacidadButacas();
+                    $asientosOcupados = ($sala->getCapacidadButacas()) - $asientosDisponibles;
+                    $proyeccionDao->updateAsientos($asientosDisponibles, $asientosOcupados, $proyeccion->getIdProyeccion());
                 }
             }    
         }

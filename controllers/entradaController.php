@@ -10,27 +10,27 @@ use daoDB\CineDao as CineDao;
 class EntradaController
 {
     function __construct()
-    { }
+    {
+    }
 
     public function index($msg = null)
     {
         include_once(VIEWS . '/header.php');
         if ($_SESSION["loggedRole"] == "admin") {
             include_once(VIEWS . '/navAdmin.php');
-            if (!isset($_GET["action"]) && !isset($_GET["fecha1"]) && !isset($_GET["fecha2"]) && !isset($_GET["fecha1cine"]) && !isset($_GET["fecha2cine"]) )
-                include_once(VIEWS . '/consultaVendidos.php');
-            if (isset($_GET["action"])) {
-                if ($_GET["action"] == "consultarPorPelicula")
+            if(!isset($_GET["action"]))
+            {
+                if(isset($_GET["fecha1"]) && isset($_GET["fecha2"]))
                     include_once(VIEWS . '/consultaVendidosPelicula.php');
-                if ($_GET["action"] == "consultarPorFechaPelicula")
-                    include_once(VIEWS . '/consultarEntreFechasPelicula.php'); 
-                if ($_GET["action"] == "consultarPorFechaCine")
-                    include_once(VIEWS . '/consultarEntreFechasCine.php');
+                else
+                    include_once(VIEWS . '/consultaVendidos.php');
             }
-            if (isset($_GET["fecha1"]) && isset($_GET["fecha2"]))
-                include_once(VIEWS . '/consultarEntreFechasPelicula.php');
-            if (isset($_GET["fecha1cine"]) && isset($_GET["fecha2cine"]))
-                include_once(VIEWS . '/consultarEntreFechasCine.php');
+            else{
+                if ($_GET["action"] == "consultarPorFechaCine")
+                    include_once(VIEWS . '/consultaVendidos.php');
+                else
+                    include_once(VIEWS . '/consultaVendidosPelicula.php');
+            }    
         }
         if ($_SESSION["loggedRole"] == "cliente") {
             include_once(VIEWS . '/navClient.php');
@@ -67,23 +67,25 @@ class EntradaController
         $valoresAMostrar = array();
         if (!empty($entradasCliente)) {
             foreach ($entradasCliente as $value) {
-                $proyeccion = ProyeccionController::buscarProyeccion($value->getIdProyeccion());
-                $sala = SalaController::readSala($proyeccion->getIdSala());
-                $cine = CineController::readCine($sala->getIdCine());
-                $pelicula = PeliculaController::readPelicula($proyeccion->getIdPelicula());
-                $compraDao = new CompraDao();
-                $compra = $compraDao->read($value->getIdCompra());
-                $precio = $compra->getTotal() / $compra->getCantEntradas();
+                if ($value->getBaja() == false) {
+                    $proyeccion = ProyeccionController::buscarProyeccion($value->getIdProyeccion());
+                    $sala = SalaController::readSala($proyeccion->getIdSala());
+                    $cine = CineController::readCine($sala->getIdCine());
+                    $pelicula = PeliculaController::readPelicula($proyeccion->getIdPelicula());
+                    $compraDao = new CompraDao();
+                    $compra = $compraDao->read($value->getIdCompra());
+                    $precio = $compra->getTotal() / $compra->getCantEntradas();
 
-                $valor["idEntrada"] = $value->getIdEntrada();
-                $valor["cine"] = $cine->getNombre();
-                $valor["sala"] = $sala->getNombre();
-                $valor["pelicula"] = $pelicula->getNombrePelicula();
-                $valor["precio"] = $precio;
-                $valor["fecha"] = $proyeccion->getFecha();
-                $valor["horario"] = $proyeccion->getHorario();
-                $valor["qr"] = str_replace('chs=300x300', 'chs=70x70', $value->getCodigoQR());
-                array_push($valoresAMostrar, $valor);
+                    $valor["idEntrada"] = $value->getIdEntrada();
+                    $valor["cine"] = $cine->getNombre();
+                    $valor["sala"] = $sala->getNombre();
+                    $valor["pelicula"] = $pelicula->getNombrePelicula();
+                    $valor["precio"] = $precio;
+                    $valor["fecha"] = $proyeccion->getFecha();
+                    $valor["horario"] = $proyeccion->getHorario();
+                    $valor["qr"] = str_replace('chs=300x300', 'chs=70x70', $value->getCodigoQR());
+                    array_push($valoresAMostrar, $valor);
+                }
             }
         }
         return $valoresAMostrar;

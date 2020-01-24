@@ -152,12 +152,16 @@ class SalaDao implements IDao
             if (is_array($arrayProyecciones)) {
                 foreach ($arrayProyecciones as $proyeccion) {
                     if ($idSala == $proyeccion->getIdSala()) {
-                        $proyeccionDao->updateAsientosDisponibles($sala->getCapacidadButacas(), $proyeccion->getIdProyeccion());
+                        $asientosDisponibles = $sala->getCapacidadButacas();
+                        $asientosOcupados = ($sala->getCapacidadButacas()) - $asientosDisponibles;
+                        $proyeccionDao->updateAsientos($asientosDisponibles, $asientosOcupados, $proyeccion->getIdProyeccion());
                     }
                 }
             } else {
                 if ($idSala == $arrayProyecciones->getIdSala()) {
-                    $proyeccionDao->updateAsientosDisponibles($sala->getCapacidadButacas(), $arrayProyecciones->getIdProyeccion());
+                    $asientosDisponibles = $sala->getCapacidadButacas();
+                    $asientosOcupados = ($sala->getCapacidadButacas()) - $asientosDisponibles;
+                    $proyeccionDao->updateAsientos($asientosDisponibles, $asientosOcupados, $proyeccion->getIdProyeccion());
                 }
             }
         }

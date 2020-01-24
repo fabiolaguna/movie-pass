@@ -7,6 +7,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use interfaces\IDao as IDao;
 use models\Proyeccion as Proyeccion;
 use controllers\SalaController as SalaController;
+use controllers\PeliculaController as PeliculaController;
 
 class ProyeccionDao implements IDao
 {
@@ -121,6 +122,15 @@ class ProyeccionDao implements IDao
                 foreach ($entradasEliminar as $value) {
                     $entradaDao->delete($value->getIdEntrada());
 
+                    $userDao = new Usuario();
+                    $salaDao = new SalaDao();
+                    $cineDao = new CineDao();
+                    $mailUser = $userDao->readEmail($value->getIdCliente());
+                    $proyec = $this->read($value->getIdProyeccion());
+                    $sala = $salaDao->read($proyec->getIdSala());
+                    $cine = $cineDao->read($sala->getIdCine());
+                    $pelicula = PeliculaController::readPelicula($proyec->getIdPelicula());
+
                     $mail = new PHPMailer(true);
                     //Server settings
                     //Enable SMTP debugging
@@ -140,19 +150,17 @@ class ProyeccionDao implements IDao
 
                     //Recipients
                     $mail->setFrom('moviepassxd@gmail.com', 'Movie Pass');
-                    $mail->addAddress($_SESSION["loggedEmail"]); // Name is optional
+                    $mail->addAddress($mailUser); // Name is optional
                     // Content
                     $mail->isHTML(true);                                  // Set email format to HTML
                     $mail->Subject = 'Entrada cine';
-                    $mail->Body    = "Se adjunta la informacion de la compra con un codigo qr que debera presentar al momento de entrar a la funcion" . "<br>" . "<br>"  .
-                        "Número de entrada: " . $entrada->getIdEntrada() . "<br>" .
+                    $mail->Body    = "Lamentamos informarle que por ciertos inconvenientes en la proyeccion de x pelicula en x cine, hemos eliminado la entrada que usted ha adquirido. El monto de la entrada sera retribuido a la cuenta con la que ha efectuado la compra." . "<br>" . "<br>"  .
+                        "Número de entrada: " . $value->getIdEntrada() . "<br>" .
                         "<br>" . "Cine: " . $cine->getNombre() .
                         "<br>" . "Sala: " . $sala->getNombre() .
                         "<br>" . "Pelicula: " . $pelicula->getNombrePelicula() .
-                        "<br>" . "Precio: " . $precio .
-                        "<br>" . "Fecha: " . $proyeccion->getFecha() .
-                        "<br>" . "Horario: " . $proyeccion->getHorario() .
-                        "<br>" . $entrada->getCodigoQR();
+                        "<br>" . "Fecha: " . $proyec->getFecha() .
+                        "<br>" . "Horario: " . $proyec->getHorario();
                     $mail->send();
                 }
             }

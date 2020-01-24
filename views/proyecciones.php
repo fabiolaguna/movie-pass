@@ -68,10 +68,17 @@
                                         <td> <?php echo ($arrayProyecciones[$i]->getAsientosOcupados()); ?> </td>
                                         <td> <?php echo ($arrayProyecciones[$i]->getFecha()); ?> </td>
                                         <td> <?php echo ($arrayProyecciones[$i]->getHorario()); ?> </td>
-                                        <td>
-                                            <a class="btn btn-danger btn-sm" href="<?php echo (FRONT_ROOT); ?>/proyeccion/eliminarProyeccion?idProyeccion=<?php echo ($arrayProyecciones[$i]->getIdProyeccion()); ?>" onclick="clicked(event)">Eliminar</a>
-                                        </td>
                                         <?php 
+                                            $fecha = date('Y-m-d');
+                                            if($fecha != $arrayProyecciones[$i]->getFecha()){
+                                        ?>
+                                                <td>
+                                                    <a class="btn btn-danger btn-sm" href="<?php echo (FRONT_ROOT); ?>/proyeccion/eliminarProyeccion?idProyeccion=<?php echo ($arrayProyecciones[$i]->getIdProyeccion()); ?>" onclick="clicked(event)">Eliminar</a>
+                                                </td>
+                                        <?php
+                                            }
+                                            else {
+                                                ?> <td hidden> <?php }
                                             $entrada = $entradaDao->readProyeccion($arrayProyecciones[$i]->getIdProyeccion());
                                             if($entrada == false)
                                             {
