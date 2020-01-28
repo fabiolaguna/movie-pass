@@ -61,13 +61,10 @@ class Usuario implements IDao
         $this->usersList=array();
         $this->retrieveData();
         $value=null;
-        $id=1;
         foreach($this->usersList as $user)
         {
-            if($user->getEmail()==$email)   
-                $value=$id;      
-            $id++;
-            $idUsuario=$id que haga getemail
+            if($user->getIdUsuario()==$idUsuario)   
+                $value=$user->getEmail();      
         }
         return $value;
     }
@@ -76,12 +73,10 @@ class Usuario implements IDao
         $this->usersList=array();
         $this->retrieveData();
         $value=null;
-        $id=1;
         foreach($this->usersList as $user)
         {
             if($user->getEmail()==$email)   
-                $value=$id;      
-            $id++;
+                $value=$user->getIdUsuario();      
         }
         return $value;
     }
@@ -90,7 +85,6 @@ class Usuario implements IDao
     {
         $this->usersList=array();
         $this->retrieveData();
-        $i = 0;
         foreach ($this->userList as $user) {
             if ($user->getEmail() == $email)
                 $user->setBaja(true);
@@ -104,6 +98,7 @@ class Usuario implements IDao
         $this->retrieveData();
         $i = 0;
         $j = 0;
+        $msg = null;
         foreach ($this->userList as $value) {
             $i++;
             if ($value->getEmail() == $email)
@@ -116,9 +111,6 @@ class Usuario implements IDao
             if (($user->getContrasenia() != null) && !empty($user->getContrasenia()))
                 $this->userList[$j]->setContrasenia($user->getContrasenia());
 
-            if (($user->getRol() != null) && !empty($user->getRol()))
-                $this->userList[$j]->setRol($user->getRol());
-
             if (($user->getNombre() != null) && !empty($user->getNombre()))
                 $this->userList[$j]['perfilUser']->setNombre($user->getNombre());
                 
@@ -127,8 +119,11 @@ class Usuario implements IDao
                 
             if (($user->getDni() != null) && !empty($user->getDni()))
                 $this->userList[$j]['perfilUser']->setDni($user->getDni());
+
+            $msg = "dou";
         }
         $this->saveData();
+        return $msg;
     }
 
     private function saveData()

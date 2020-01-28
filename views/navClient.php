@@ -22,7 +22,10 @@
                 <a class="nav-link js-scroll-trigger" href="<?php echo (FRONT_ROOT) ?>/entrada/index">Entradas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link js-scroll-trigger" href="<?php echo (FRONT_ROOT) ?>/home/logout">Logout</a>
+                <a class="nav-link js-scroll-trigger" href="<?php echo (FRONT_ROOT) ?>/usuario/index">Mi cuenta</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="<?php echo (FRONT_ROOT) ?>/home/logout">Logout <?php echo(" ");?><small><?php echo("(".$_SESSION["loggedEmail"].")"); ?></small></a>
             </li>
         </ul>
     </div>

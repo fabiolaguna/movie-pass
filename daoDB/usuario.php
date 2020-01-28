@@ -111,7 +111,7 @@ class Usuario implements IDao
     public function update($user, $email)
     {
         $userExist = $this->read($user->getEmail());
-        if (empty($userExist)) {
+        if (!empty($userExist)) {
             $sql = "UPDATE usuarios SET nombre = :nombre, apellido = :apellido, dni = :dni, email = :email, contrasenia = :contrasenia, rol = :rol, baja = :baja WHERE email = '$email'";
             $parameters['nombre'] = $user->getPerfilUsuario()->getNombre();
             $parameters['apellido'] = $user->getPerfilUsuario()->getApellido();
@@ -167,6 +167,6 @@ class Usuario implements IDao
             $user->setIdUsuario($p['idUsuario']);
             return $user;
         }, $value);
-        return $resp;
+        return count($resp) > 1 ? $resp : $resp['0'];
     }
 }

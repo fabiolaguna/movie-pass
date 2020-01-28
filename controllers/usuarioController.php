@@ -16,13 +16,20 @@ class UsuarioController
         $this->userDAO = new UserDao();
     }
     public function index($msg=null){ //Tuve que hacer un index para cargar la vista del adminAdd desde el navAdmin
-        
+        include_once(VIEWS.'/header.php');
+
         if ($_SESSION['loggedRole'] == 'admin'){ 
-            include_once(VIEWS.'/header.php');
             include_once(VIEWS.'/navAdmin.php');
-            include_once(VIEWS.'/adminAdd.php');
-            include_once(VIEWS.'/footer.php');
+            if (!isset($_GET["action"]))
+                include_once(VIEWS.'/adminAdd.php');
+            else
+                include_once(VIEWS.'/miCuenta.php');
+        } else { 
+            include_once(VIEWS.'/navClient.php');
+            include_once(VIEWS.'/miCuenta.php');
         }
+
+        include_once(VIEWS.'/footer.php');
     } 
 
     public function checkSession()
@@ -102,15 +109,54 @@ class UsuarioController
         unset($_SESSION["loggedRole"]);
         session_destroy();
     }
-    /*public function add($name,$birthdate,$nationality,$email,$password){
-            //agrega un usuario al dao
-            $user = new User($name,$birthdate,$nationality,$email,$password);
-            $this->userDAO->add($user);
-            //$this->view->admUsers();
+    public function updateAccount($nombre=null, $apellido=null, $dni=null, $email=null, $password=null, $passwordRepeated=null){
+
+        $userDao = new UserDao();
+        $usuarioAux = $userDao->read($_SESSION["loggedEmail"]); //implementarlo en json (y modificar el metodo de update)
+        $perfilUser = $usuarioAux->getPerfilUsuario();
+
+        if ($nombre == null){
+            $nombre = $perfilUser->getNombre();
+        }  
+        if ($apellido == null){
+            $apellido = $perfilUser->getApellido();
+        }  
+        if ($dni == null){
+            $dni = $perfilUser->getDni();
+        }  
+        if ($email == null){
+            $email = $usuarioAux->getEmail();
+        }      
+        if ($password == null){
+            $password = $usuarioAux->getContrasenia();
+        }  
+        if ($passwordRepeated == null){
+            $passwordRepeated = $usuarioAux->getContrasenia();
+        }  
+        if($password==$passwordRepeated)
+        {
+            $perfilUser = new PerfilUser($nombre, $apellido, $dni);
+            $newUser = new User($email, $password, $perfilUser, $_SESSION["loggedRole"]);
+            $msg = null;
+            $msg = $this->userDAO->update($newUser, $_SESSION["loggedEmail"]);
+            if ($msg == null){
+                $msg = 'No se pudo modificar, usuario no existente';
+            }else {
+                $msg = 'Modificado con éxito';
+                if(isset($email))
+                    $_SESSION["loggedEmail"]=$email;
+            }
         }
-        public function delete($email){
-            //borra un user
-            $this->userDAO->delete($email);
-            //$this->view->admUsers();
-        }*/
+        else {
+            $msg = "No se pudo modificar, las contraseñas no coinciden";
+        }
+        $_GET["action"]=5; //porque sino se unsetea y no entra a la vista correspondiente
+        $this->index($msg);
+    }
+
+    public function delete(){
+
+            $this->userDAO->delete($_SESSION["loggedEmail"]);
+            $this->index("Usuario eliminado con exito");
+    }
 }

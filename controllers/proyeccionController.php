@@ -171,10 +171,12 @@ class ProyeccionController
         if (!empty($arrayAux)) {
             if (is_array($arrayAux)) {
                 foreach ($arrayAux as $value) {
-                    array_push($arrayProyecciones, $value);
+                    if($value->getBaja()==false)
+                        array_push($arrayProyecciones, $value);
                 }
             } else {
-                array_push($arrayProyecciones, $arrayAux);
+                if($arrayAux->getBaja()==false)
+                    array_push($arrayProyecciones, $arrayAux);
             }
             $_SESSION["proyecciones"] = $arrayProyecciones;
         }
