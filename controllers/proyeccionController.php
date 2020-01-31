@@ -69,7 +69,7 @@ class ProyeccionController
             $msg = 'Agregada con exito';
         } else {
             if ($msg == -1)
-                $msg = 'No se ha podido agregar. Una pelicula no puede ser reproducida en mas de una sala del cine';
+                $msg = 'No se ha podido agregar. Una película no puede ser reproducida en más de una sala del cine';
             if ($msg == -2)
                 $msg = 'No se ha podido agregar. Una película solo puede ser proyectada en un único cine por día';
             if ($msg == -3)
@@ -80,7 +80,6 @@ class ProyeccionController
 
     public function eliminarProyeccion()
     {
-
         $idProyeccion = null;
         if (isset($_GET["idProyeccion"])) {
             $idProyeccion = $_GET["idProyeccion"];

@@ -140,7 +140,7 @@ class UsuarioController
             $msg = null;
             $msg = $this->userDAO->update($newUser, $_SESSION["loggedEmail"]);
             if ($msg == null){
-                $msg = 'No se pudo modificar, usuario no existente';
+                $msg = 'No se pudo modificar, usuario ya existente';
             }else {
                 $msg = 'Modificado con éxito';
                 if(isset($email))

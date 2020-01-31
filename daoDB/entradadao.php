@@ -90,6 +90,16 @@ class EntradaDao implements IDao
             throw $ex;
         }
     }
+    public function deleteAbsolut($idEntrada)
+    {
+        $sql = "DELETE FROM entradas WHERE idEntrada = $idEntrada";
+        try {
+            $this->connection = Connection::getInstance();
+            return $this->connection->ExecuteNonQuery($sql);
+        } catch (\PDOException $ex) {
+            throw $ex;
+        }
+    }
     protected function mapear($value)
     {
         $value = is_array($value) ? $value : [];

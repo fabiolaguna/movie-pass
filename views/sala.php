@@ -83,5 +83,22 @@
         </div>
         <!-- /.container-fluid -->
     </form>
-
+    <?php if (isset($msg)) { ?>
+        <div class="container">
+            <div class="alert
+                    <?php
+                            if (isset($msg))
+                                echo 'alert-success';
+                            else
+                                echo 'alert-danger'; ?> 
+                        alert-dismissible fade show mt-3" role="alert">
+                <strong>
+                    <?php
+                        if (isset($msg))
+                            echo $msg;
+                        ?>
+                </strong>
+            </div>
+        </div>
+    <?php } ?>                            
 </div>

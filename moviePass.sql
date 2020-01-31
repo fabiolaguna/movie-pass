@@ -14,7 +14,7 @@ create table usuarios(
 	idUsuario int not null auto_increment,
     nombre varchar (30),
     apellido varchar (30),
-    dni int unique,
+    dni int,
     email varchar (45) unique,
     contrasenia varchar (40),
     rol varchar(8),
@@ -105,13 +105,14 @@ select *
 from usuarios;
 
 select *
-from entradas;
+from salas;
 
 select *
 from cines as c
 join direcciones as d
 on c.idDireccion = d.idDireccion;
-
+select * 
+from entradas; 
 select *
 from proyecciones;
 #update cines set baja=0 where idCine=2;

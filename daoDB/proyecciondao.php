@@ -9,6 +9,11 @@ use models\Proyeccion as Proyeccion;
 use controllers\SalaController as SalaController;
 use controllers\PeliculaController as PeliculaController;
 
+
+require(ROOT . '/PHPMailer/src/Exception.php');
+require(ROOT . '/PHPMailer/src/PHPMailer.php');
+require(ROOT . '/PHPMailer/src/SMTP.php');
+
 class ProyeccionDao implements IDao
 {
     private $connection;
@@ -295,7 +300,7 @@ class ProyeccionDao implements IDao
             }
             if (!empty($entradasEliminar)) {
                 foreach ($entradasEliminar as $value) {
-                    $entradaDao->delete($value->getIdEntrada());
+                    $entradaDao->deleteAbsolut($value->getIdEntrada());
 
                     $userDao = new Usuario();
                     $salaDao = new SalaDao();
@@ -305,7 +310,6 @@ class ProyeccionDao implements IDao
                     $sala = $salaDao->read($proyec->getIdSala());
                     $cine = $cineDao->read($sala->getIdCine());
                     $pelicula = PeliculaController::readPelicula($proyec->getIdPelicula());
-
                     $mail = new PHPMailer(true);
                     //Server settings
                     //Enable SMTP debugging
@@ -329,7 +333,7 @@ class ProyeccionDao implements IDao
                     // Content
                     $mail->isHTML(true);                                  // Set email format to HTML
                     $mail->Subject = 'Entrada cine';
-                    $mail->Body    = "Lamentamos informarle que por ciertos inconvenientes en la proyeccion de x pelicula en x cine, hemos eliminado la entrada que usted ha adquirido. El monto de la entrada sera retribuido a la cuenta con la que ha efectuado la compra." . "<br>" . "<br>"  .
+                    $mail->Body    = "Lamentamos informarle que por ciertos inconvenientes en la proyeccion de la pelicula " . $pelicula->getNombrePelicula() . " en el cine " . $cine->getNombre() . ", hemos eliminado la entrada que usted ha adquirido. El monto de la entrada sera retribuido a la cuenta con la que ha efectuado la compra." . "<br>" . "<br>"  .
                         "Número de entrada: " . $value->getIdEntrada() . "<br>" .
                         "<br>" . "Cine: " . $cine->getNombre() .
                         "<br>" . "Sala: " . $sala->getNombre() .

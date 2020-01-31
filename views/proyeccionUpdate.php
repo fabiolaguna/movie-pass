@@ -69,7 +69,7 @@
                                                                             $fecha = date('Y-m-d');
                                                                             $nuevafecha = strtotime('+1 day', strtotime($fecha));
                                                                             $nuevafecha = date('Y-m-d', $nuevafecha);
-                                                                            echo ($nuevafecha); ?> max="2030-01-01" required>
+                                                                            echo ($nuevafecha); ?> max="2030-01-01">
             </div>
 
             <div class="form-group">

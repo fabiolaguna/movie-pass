@@ -1,7 +1,9 @@
 <style>
     body {
-        <?php if (isset($_GET["cantidadEntradas"])) {   ?>background: linear-gradient(to bottom, grey 10%, black);
-        <?php } else { ?>background: linear-gradient(to bottom, black 10%, white);
+        <?php if (isset($_GET["cantidadEntradas"])) {   ?>
+            background: linear-gradient(to bottom, grey 10%, black);
+        <?php } else { ?>  
+            background: linear-gradient(to bottom, black 10%, white);
         <?php } ?>
     }
 </style>
@@ -30,13 +32,13 @@
                         <tr>
                             <th>Cantidad de entradas</th>
                             <th>Precio <?php
-                                                                            $dia = strtotime($proyeccion->getFecha());
-                                                                            $dia = date('l', $dia);
-                                                                            if ($dia == 'Tuesday' || $dia == 'Wednesday') {
-                                                                                $precio = $sala->getPrecio() * (0.75);
-                                                                                echo ("(con descuento)");
-                                                                            }
-                                        ?></th>
+                                $dia = strtotime($proyeccion->getFecha());
+                                $dia = date('l', $dia);
+                                if ($dia == 'Tuesday' || $dia == 'Wednesday') {
+                                    $precio = $sala->getPrecio() * (0.75);
+                                    echo ("(con descuento)");
+                                }
+                            ?></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,14 +62,14 @@
                             </td>
                             <td>
                                 $<?php
-                                                                                                                                $dia = strtotime($proyeccion->getFecha());
-                                                                                                                                $dia = date('l', $dia);
-                                                                                                                                if ($dia == 'Tuesday' || $dia == 'Wednesday') {
-                                                                                                                                    $precio = $sala->getPrecio() * (0.75);
-                                                                                                                                    echo ($precio);
-                                                                                                                                } else {
-                                                                                                                                    echo ($sala->getPrecio());
-                                                                                                                                }
+                                        $dia = strtotime($proyeccion->getFecha());
+                                        $dia = date('l', $dia);
+                                        if ($dia == 'Tuesday' || $dia == 'Wednesday') {
+                                            $precio = $sala->getPrecio() * (0.75);
+                                            echo ($precio);
+                                        } else {
+                                            echo ($sala->getPrecio());
+                                        }
                                     ?>
                             </td>
                         </tr>
@@ -82,9 +84,9 @@
         </form>
     </div>
     <?php
-                                                                                                                                if (!isset($_GET["cantidadEntradas"]))
-                                                                                                                                    echo ("<br><br><br><br><br>");
-                                                                                                                                if (isset($_GET["cantidadEntradas"])) {   ?>
+        if (!isset($_GET["cantidadEntradas"]))
+            echo ("<br><br><br><br><br>");
+        if (isset($_GET["cantidadEntradas"])) {   ?>
         <br>
         <div class="container">
             <?php if ($_GET["cantidadEntradas"] == 0) { ?>
@@ -96,15 +98,15 @@
                     </strong>
                 </div>
             <?php } else {
-                                                                                                                                        $cine = controllers\CineController::readCine($sala->getidCine());
-                                                                                                                                        $dia = strtotime($proyeccion->getFecha());
-                                                                                                                                        $dia = date('l', $dia);
-                                                                                                                                        $precio = $sala->getPrecio();
-                                                                                                                                        if ($dia == 'Tuesday' || $dia == 'Wednesday') {
-                                                                                                                                            $precio = $precio * (0.75);
-                                                                                                                                        }
-                                                                                                                                        $total = $precio * $_GET["cantidadEntradas"];
-                                                                                                                                        $pelicula = controllers\PeliculaController::readPelicula($proyeccion->getIdPelicula());
+                $cine = controllers\CineController::readCine($sala->getidCine());
+                $dia = strtotime($proyeccion->getFecha());
+                $dia = date('l', $dia);
+                $precio = $sala->getPrecio();
+                if ($dia == 'Tuesday' || $dia == 'Wednesday') {
+                    $precio = $precio * (0.75);
+                }
+                $total = $precio * $_GET["cantidadEntradas"];
+                $pelicula = controllers\PeliculaController::readPelicula($proyeccion->getIdPelicula());
             ?>
                 <br>
                 <h4 class="ml-4 text-white">Finaliza tu operación</h4>

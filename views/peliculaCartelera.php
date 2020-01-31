@@ -1,6 +1,6 @@
     <?php
     $peliculaCartelera = $_SESSION["peliculaCartelera"];
-    //unset($_SESSION["peliculaCartelera"]); //Si se hace el unset, despues no se puede volver atras 
+    unset($_SESSION["peliculaCartelera"]); //Si se hace el unset, despues no se puede volver atras 
 
     $funcionesAgotadas = true;
     foreach ($peliculaCartelera["proyecciones"] as $proye) {

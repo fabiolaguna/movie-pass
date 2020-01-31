@@ -72,6 +72,17 @@ class EntradaDao implements IDao
         $this->saveData();
     }
 
+    public function deleteAbsolut($idEntrada) //HACERLO BIEN
+    {
+        $this->entradaList=array();
+        $this->retrieveData();
+        foreach ($this->entradaList as $key => $entrada) {
+            if ($entrada->getIdEntrada() == $idEntrada)
+                $entrada->setBaja(true);
+        }
+        $this->saveData();
+    }
+
     public function update($direccion, $idDireccion) //no voy a editar una entrada
     { }
 
