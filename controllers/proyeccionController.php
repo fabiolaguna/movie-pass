@@ -3,7 +3,7 @@
 namespace controllers;
 
 use models\Proyeccion as Proyeccion;
-use daoDB\ProyeccionDao as ProyeccionDao;
+use daojson\ProyeccionDao as ProyeccionDao;
 use controllers\SalaController as SalaController;
 use models\Sala;
 
@@ -30,6 +30,9 @@ class ProyeccionController
             include_once(VIEWS . '/navClient.php');
             if (isset($_SESSION["peliculaCartelera"]))
                 include_once(VIEWS . '/peliculaCartelera.php');
+            else
+                if (isset($_GET["action"]) && $_GET["action"] == "volver")
+                $this->proyeccionDePelicula();
             if (isset($_GET["action"])) {
                 if ($_GET["action"] == "consultarPeliculasFecha")
                     include_once(VIEWS . '/carteleraFecha.php');
@@ -170,11 +173,11 @@ class ProyeccionController
         if (!empty($arrayAux)) {
             if (is_array($arrayAux)) {
                 foreach ($arrayAux as $value) {
-                    if($value->getBaja()==false)
+                    if ($value->getBaja() == false)
                         array_push($arrayProyecciones, $value);
                 }
             } else {
-                if($arrayAux->getBaja()==false)
+                if ($arrayAux->getBaja() == false)
                     array_push($arrayProyecciones, $arrayAux);
             }
             $_SESSION["proyecciones"] = $arrayProyecciones;
@@ -201,7 +204,42 @@ class ProyeccionController
         if (!empty($proyeccionesList)) {
             if (is_array($proyeccionesList)) {
                 foreach ($proyeccionesList as $proyeccion) {
-                    $idPelicula = $proyeccion->getIdPelicula();
+                    if ($proyeccion->getBaja() == false) {
+                        $idPelicula = $proyeccion->getIdPelicula();
+                        $pelicula = $peliculaController->buscarPelicula($idPelicula);
+                        if ($pelicula != null) {
+                            if ($cartelera == null) {
+                                $cartelera[$i]["titulo"] = $pelicula->getNombrePelicula();
+                                $cartelera[$i]["imagen"] = $pelicula->getImagen();
+                                $cartelera[$i]["poster"] = $pelicula->getPoster();
+                                $cartelera[$i]["idPelicula"] = $pelicula->getIdPelicula();
+                                $cartelera[$i]["generos"] = CategoriaController::idToGenreName($pelicula->getIdCategoria());
+                                $cartelera[$i]["fecha"] = $proyeccion->getFecha();
+                                $i++;
+                            } else {
+                                $rta = true;
+                                $cant = count($cartelera);
+                                for ($j = 0; $j < $cant; $j++) {
+                                    if ($pelicula->getIdPelicula() == $cartelera[$j]["idPelicula"]) {
+                                        $rta = false;
+                                    }
+                                }
+                                if ($rta) {
+                                    $cartelera[$i]["titulo"] = $pelicula->getNombrePelicula();
+                                    $cartelera[$i]["imagen"] = $pelicula->getImagen();
+                                    $cartelera[$i]["poster"] = $pelicula->getPoster();
+                                    $cartelera[$i]["idPelicula"] = $pelicula->getIdPelicula();
+                                    $cartelera[$i]["generos"] = CategoriaController::idToGenreName($pelicula->getIdCategoria());
+                                    $cartelera[$i]["fecha"] = $proyeccion->getFecha();
+                                    $i++;
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                if ($proyeccionesList->getBaja() == false) {
+                    $idPelicula = $proyeccionesList->getIdPelicula();
                     $pelicula = $peliculaController->buscarPelicula($idPelicula);
                     if ($pelicula != null) {
                         if ($cartelera == null) {
@@ -210,7 +248,7 @@ class ProyeccionController
                             $cartelera[$i]["poster"] = $pelicula->getPoster();
                             $cartelera[$i]["idPelicula"] = $pelicula->getIdPelicula();
                             $cartelera[$i]["generos"] = CategoriaController::idToGenreName($pelicula->getIdCategoria());
-                            $cartelera[$i]["fecha"] = $proyeccion->getFecha();
+                            $cartelera[$i]["fecha"] = $proyeccionesList->getFecha();
                             $i++;
                         } else {
                             $rta = true;
@@ -226,40 +264,9 @@ class ProyeccionController
                                 $cartelera[$i]["poster"] = $pelicula->getPoster();
                                 $cartelera[$i]["idPelicula"] = $pelicula->getIdPelicula();
                                 $cartelera[$i]["generos"] = CategoriaController::idToGenreName($pelicula->getIdCategoria());
-                                $cartelera[$i]["fecha"] = $proyeccion->getFecha();
+                                $cartelera[$i]["fecha"] = $proyeccionesList->getFecha();
                                 $i++;
                             }
-                        }
-                    }
-                }
-            } else {
-                $idPelicula = $proyeccionesList->getIdPelicula();
-                $pelicula = $peliculaController->buscarPelicula($idPelicula);
-                if ($pelicula != null) {
-                    if ($cartelera == null) {
-                        $cartelera[$i]["titulo"] = $pelicula->getNombrePelicula();
-                        $cartelera[$i]["imagen"] = $pelicula->getImagen();
-                        $cartelera[$i]["poster"] = $pelicula->getPoster();
-                        $cartelera[$i]["idPelicula"] = $pelicula->getIdPelicula();
-                        $cartelera[$i]["generos"] = CategoriaController::idToGenreName($pelicula->getIdCategoria());
-                        $cartelera[$i]["fecha"] = $proyeccionesList->getFecha();
-                        $i++;
-                    } else {
-                        $rta = true;
-                        $cant = count($cartelera);
-                        for ($j = 0; $j < $cant; $j++) {
-                            if ($pelicula->getIdPelicula() == $cartelera[$j]["idPelicula"]) {
-                                $rta = false;
-                            }
-                        }
-                        if ($rta) {
-                            $cartelera[$i]["titulo"] = $pelicula->getNombrePelicula();
-                            $cartelera[$i]["imagen"] = $pelicula->getImagen();
-                            $cartelera[$i]["poster"] = $pelicula->getPoster();
-                            $cartelera[$i]["idPelicula"] = $pelicula->getIdPelicula();
-                            $cartelera[$i]["generos"] = CategoriaController::idToGenreName($pelicula->getIdCategoria());
-                            $cartelera[$i]["fecha"] = $proyeccionesList->getFecha();
-                            $i++;
                         }
                     }
                 }
@@ -318,7 +325,6 @@ class ProyeccionController
     public function proyeccionDePelicula()
     {
         $idPelicula = $_GET["idPelicula"];
-        unset($_GET["idPelicula"]);
         $peliculaController = new PeliculaController();
         $proyeccionDao = new ProyeccionDao();
         $idSala = array();
@@ -326,26 +332,29 @@ class ProyeccionController
         $proyecciones = array();
         if (is_array($proyeccionesList)) {
             foreach ($proyeccionesList as $proyeccion) {
-                if ($idPelicula == $proyeccion->getIdPelicula() && ($proyeccion->getAsientosDisponibles() > 0)) {
+                if ($proyeccion->getBaja() == false && $idPelicula == $proyeccion->getIdPelicula() && ($proyeccion->getAsientosDisponibles() > 0)) {
                     array_push($proyecciones, $proyeccion);
                 }
             }
         } else {
-            if ($idPelicula == $proyeccionesList->getIdPelicula() && ($proyeccionesList->getAsientosDisponibles() > 0)) {
+            if ($proyeccionesList->getBaja() == false && $idPelicula == $proyeccionesList->getIdPelicula() && ($proyeccionesList->getAsientosDisponibles() > 0)) {
                 array_push($proyecciones, $proyeccionesList);
             }
         }
 
         foreach ($proyecciones as $proyeccion) {
-            if (empty($idSala))
-                array_push($idSala, $proyeccion->getIdSala());
-            else {
-                for ($i = 0; $i < count($idSala); $i++) {
-                    if (!(in_array($proyeccion->getIdSala(), $idSala)))
-                        array_push($idSala, $proyeccion->getIdSala());
+            if ($proyeccion->getBaja() == false) {
+                if (empty($idSala))
+                    array_push($idSala, $proyeccion->getIdSala());
+                else {
+                    for ($i = 0; $i < count($idSala); $i++) {
+                        if (!(in_array($proyeccion->getIdSala(), $idSala)))
+                            array_push($idSala, $proyeccion->getIdSala());
+                    }
                 }
             }
         }
+        
         $pelicula = $peliculaController->buscarPelicula($idPelicula);
         $nombrePelicula = $pelicula->getNombrePelicula();
         $descripcion = $pelicula->getDescripcion();
@@ -356,13 +365,31 @@ class ProyeccionController
         for ($i = 0; $i < count($idSala); $i++) {
             array_push($salas, SalaController::readSala($idSala[$i]));
         }
+
+        $idCine = array();
+        foreach ($salas as $sala) {
+            if (empty($idCine))
+                array_push($idCine, $sala->getIdCine());
+            else {
+                for ($i = 0; $i < count($idCine); $i++) {
+                    if (!(in_array($sala->getIdCine(), $idCine)))
+                        array_push($idCine, $sala->getIdCine());
+                }
+            }
+        }
+
+        $cines = array();
+        for ($i = 0; $i < count($idCine); $i++) {
+            array_push($cines, CineController::readCine($idCine[$i]));
+        }
+
         $datosAMostrar = array();
         $datosAMostrar["titulo"] = $nombrePelicula;
         $datosAMostrar["descripcion"] = $descripcion;
         $datosAMostrar["imagen"] = $imagen;
         $datosAMostrar["poster"] = $poster;
         $datosAMostrar["generos"] = $generos;
-        $datosAMostrar["salas"] = $salas;
+        $datosAMostrar["salas"] = $cines;
         $datosAMostrar["proyecciones"] = $proyecciones;
 
         $_SESSION["peliculaCartelera"] = $datosAMostrar;

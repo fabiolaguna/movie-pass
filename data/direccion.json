@@ -1,16 +1,16 @@
 [
     {
         "idDireccion": 1,
-        "calle": "Cordoba",
-        "altura": "1674",
+        "calle": "Golico",
+        "altura": "12",
         "provincia": "Buenos Aires",
         "ciudad": "Mar del Plata"
     },
     {
         "idDireccion": 2,
-        "calle": "Avenida Corrientes",
-        "altura": "3058",
+        "calle": "Elmo",
+        "altura": "181",
         "provincia": "Buenos Aires",
-        "ciudad": "Capital Federal"
+        "ciudad": "Mar de las Pompas"
     }
 ]

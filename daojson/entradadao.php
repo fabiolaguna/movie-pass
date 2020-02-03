@@ -72,13 +72,13 @@ class EntradaDao implements IDao
         $this->saveData();
     }
 
-    public function deleteAbsolut($idEntrada) //HACERLO BIEN
+    public function deleteAbsolut($idEntrada) 
     {
         $this->entradaList=array();
         $this->retrieveData();
         foreach ($this->entradaList as $key => $entrada) {
             if ($entrada->getIdEntrada() == $idEntrada)
-                $entrada->setBaja(true);
+                unset($this->entradaList[$key]);
         }
         $this->saveData();
     }
@@ -105,6 +105,7 @@ class EntradaDao implements IDao
             $valuesArray["idCliente"] = $entrada->getIdCliente();
             $valuesArray["idCompra"] = $entrada->getIdCompra();
             $valuesArray["codigoQR"] = $entrada->getCodigoQR();
+            $valuesArray["baja"] = $entrada->getBaja();
             array_push($arrayToEncode, $valuesArray);
         }
         $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
@@ -124,6 +125,7 @@ class EntradaDao implements IDao
                 $entrada = new Entrada($valuesArray["idProyeccion"], $valuesArray["idCliente"], $valuesArray["idCompra"]);
                 $entrada->setIdEntrada($valuesArray["idEntrada"]);
                 $entrada->setCodigoQr($valuesArray["codigoQR"]);
+                $entrada->setBaja($valuesArray["baja"]);
                 array_push($this->entradaList, $entrada);
             }
         }

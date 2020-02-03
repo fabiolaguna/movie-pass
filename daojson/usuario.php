@@ -18,7 +18,7 @@ class Usuario implements IDao
 
     public function add($user)
     {
-        $this->usersList=array();
+        $this->usersList = array();
         $this->retrieveData();
         $userExist = false;
         foreach ($this->usersList as $value) {
@@ -27,6 +27,11 @@ class Usuario implements IDao
             }
         }
         if (!$userExist) {
+            $indice = 1;
+            if (!empty($this->usersList)) {
+                $indice = count($this->usersList) + 1;
+            }
+            $user->setIdUsuario($indice);
             array_push($this->usersList, $user);
             $this->saveData();
             $successMje = 'Agregado con éxito';
@@ -39,53 +44,50 @@ class Usuario implements IDao
 
     public function getAll()
     {
-        $this->usersList=array();
+        $this->usersList = array();
         $this->retrieveData();
         return $this->usersList;
     }
 
     public function read($email)
     {
-        $this->usersList=array();
+        $this->usersList = array();
         $this->retrieveData();
-        $value=null;
-        foreach($this->usersList as $user)
-        {
-            if($user->getEmail()==$email)
-                $value=$user;
+        $value = null;
+        foreach ($this->usersList as $user) {
+            if ($user->getEmail() == $email)
+                $value = $user;
         }
         return $value;
     }
     public function readEmail($idUsuario)
     {
-        $this->usersList=array();
+        $this->usersList = array();
         $this->retrieveData();
-        $value=null;
-        foreach($this->usersList as $user)
-        {
-            if($user->getIdUsuario()==$idUsuario)   
-                $value=$user->getEmail();      
+        $value = null;
+        foreach ($this->usersList as $user) {
+            if ($user->getIdUsuario() == $idUsuario)
+                $value = $user->getEmail();
         }
         return $value;
     }
     public function readIdUsuario($email)
     {
-        $this->usersList=array();
+        $this->usersList = array();
         $this->retrieveData();
-        $value=null;
-        foreach($this->usersList as $user)
-        {
-            if($user->getEmail()==$email)   
-                $value=$user->getIdUsuario();      
+        $value = null;
+        foreach ($this->usersList as $user) {
+            if ($user->getEmail() == $email)
+                $value = $user->getIdUsuario();
         }
         return $value;
     }
 
     public function delete($email)
     {
-        $this->usersList=array();
+        $this->usersList = array();
         $this->retrieveData();
-        foreach ($this->userList as $user) {
+        foreach ($this->usersList as $user) {
             if ($user->getEmail() == $email)
                 $user->setBaja(true);
         }
@@ -94,33 +96,37 @@ class Usuario implements IDao
 
     public function update($user, $email) //traer por GET en un arreglo los valores a modificar, que lo conseguis con un checkbox
     {
-        $this->usersList=array();
+        $this->usersList = array();
         $this->retrieveData();
         $i = 0;
         $j = 0;
         $msg = null;
-        foreach ($this->userList as $value) {
-            $i++;
+        foreach ($this->usersList as $value) {
             if ($value->getEmail() == $email)
                 $j = $i;
+            $i++;
         }
+
+        $perfilUser = $user->getPerfilUsuario();
+
         if (isset($user) && !empty($user)) {
+
             if (($user->getEmail() != null) && !empty($user->getEmail()))
-                $this->userList[$j]->setEmail($user->getEmail());
+                $this->usersList[$j]->setEmail($user->getEmail());
 
             if (($user->getContrasenia() != null) && !empty($user->getContrasenia()))
-                $this->userList[$j]->setContrasenia($user->getContrasenia());
+                $this->usersList[$j]->setContrasenia($user->getContrasenia());
 
-            if (($user->getNombre() != null) && !empty($user->getNombre()))
-                $this->userList[$j]['perfilUser']->setNombre($user->getNombre());
-                
-            if (($user->getApellido() != null) && !empty($user->getApellido()))
-                $this->userList[$j]['perfilUser']->setApellido($user->getApellido());
-                
-            if (($user->getDni() != null) && !empty($user->getDni()))
-                $this->userList[$j]['perfilUser']->setDni($user->getDni());
+            if (($perfilUser->getNombre() != null) && !empty($perfilUser->getNombre()))
+                $this->usersList[$j]->getPerfilUsuario()->setNombre($perfilUser->getNombre());
 
-            $msg = "dou";
+            if (($perfilUser->getApellido() != null) && !empty($perfilUser->getApellido()))
+                $this->usersList[$j]->getPerfilUsuario()->setApellido($perfilUser->getApellido());
+
+            if (($perfilUser->getDni() != null) && !empty($perfilUser->getDni()))
+                $this->usersList[$j]->getPerfilUsuario()->setDni($perfilUser->getDni());
+
+            $msg = "Usuario modificado con exito";
         }
         $this->saveData();
         return $msg;
@@ -130,6 +136,7 @@ class Usuario implements IDao
     {
         $arrayToEncode = array();
         foreach ($this->usersList as $user) {
+            $valuesArray["idUsuario"] = $user->getIdUsuario();
             $valuesArray["email"] = $user->getEmail();
             $valuesArray["pass"] = $user->getContrasenia();
             $valuesArray["rol"] = $user->getRol();
@@ -158,6 +165,7 @@ class Usuario implements IDao
                 $perfilUser = new PerfilUser($valuesArray["perfilUser"]["nombre"], $valuesArray["perfilUser"]["apellido"], $valuesArray["perfilUser"]["dni"]);
                 $user = new User($valuesArray["email"], $valuesArray["pass"], $perfilUser, $valuesArray["rol"], $valuesArray["baja"]);
                 $user->setBaja($valuesArray["baja"]);
+                $user->setIdUsuario($valuesArray["idUsuario"]);
                 array_push($this->usersList, $user);
             }
         }

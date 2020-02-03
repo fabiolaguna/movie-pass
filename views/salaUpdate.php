@@ -33,7 +33,7 @@ if (!empty(($_SESSION["cines"]))) {
                     unset($_GET['idSala']);
                     $sala = controllers\SalaController::readSala($idSala);
                     ?>
-                <p><strong>Id de sala a modificar:</strong> <?php echo ($sala->getIdSala() . "<br>Id cine: " . $sala->getIdCine() . "<br>Nombre de la sala: " . $sala->getNombre() . "<br>Precio: " . $sala->getPrecio() . "<br>Capacidad de butacas: " . $sala->getCapacidadButacas());  ?></p>
+                <p><strong>Id de sala a modificar:</strong> <?php echo ($sala->getIdSala() . "<br>Id cine: " . $sala->getIdCine() . "<br>Nombre de la sala: " . $sala->getNombre() . "<br>Precio: $" . $sala->getPrecio() . "<br>Capacidad de butacas: " . $sala->getCapacidadButacas());  ?></p>
 
                 <div class="form-group">
                     <input type="hidden" class="form-control" name="idSala" value="<?php echo ($idSala); ?>">

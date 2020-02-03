@@ -8,15 +8,15 @@ use models\Compra as Compra;
 use models\Entrada as Entrada;
 use models\PagoTC;
 
-use daoDB\CompraDao as CompraDao;
-use daoDB\EntradaDao as EntradaDao;
-use daoDB\PagoTCDao;
-use daoDB\Usuario as UsuarioDao;
-use daoDB\TarjetaCreditoDao as TarjetaCreditoDao;
+use daojson\CompraDao as CompraDao;
+use daojson\EntradaDao as EntradaDao;
+use daojson\PagoTCDao;
+use daojson\Usuario as UsuarioDao;
+use daojson\TarjetaCreditoDao as TarjetaCreditoDao;
 
-require(ROOT . '/PHPMailer/src/Exception.php');
-require(ROOT . '/PHPMailer/src/PHPMailer.php');
-require(ROOT . '/PHPMailer/src/SMTP.php');
+require_once(ROOT . '/PHPMailer/src/Exception.php');
+require_once(ROOT . '/PHPMailer/src/PHPMailer.php');
+require_once(ROOT . '/PHPMailer/src/SMTP.php');
 
 class CompraController
 {

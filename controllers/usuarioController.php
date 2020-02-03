@@ -4,7 +4,7 @@ namespace controllers;
 
 use models\Usuario as User;
 use models\PerfilUser as PerfilUser;
-use daoDB\Usuario as UserDao;
+use daojson\Usuario as UserDao;
 
 class UsuarioController
 {

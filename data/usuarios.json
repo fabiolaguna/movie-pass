@@ -1,5 +1,18 @@
 [
     {
+        "idUsuario": 1,
+        "email": "fede.alesandro@gmail.com",
+        "pass": "fedecapo",
+        "rol": "admin",
+        "baja": false,
+        "perfilUser": {
+            "nombre": "Federico",
+            "apellido": "Alesandro",
+            "dni": "42454677"
+        }
+    },
+    {
+        "idUsuario": 2,
         "email": "fabiolaguna.94@gmail.com",
         "pass": "fabiocapo",
         "rol": "cliente",
@@ -11,14 +24,27 @@
         }
     },
     {
-        "email": "fede.alesandro@gmail.com",
-        "pass": "fedecapo",
+        "idUsuario": 3,
+        "email": "tincho@gmail.com",
+        "pass": "rugby",
+        "rol": "cliente",
+        "baja": false,
+        "perfilUser": {
+            "nombre": "Juan",
+            "apellido": "Gaston",
+            "dni": "1000000"
+        }
+    },
+    {
+        "idUsuario": 4,
+        "email": "laparastedepechocolorado@gmail.com",
+        "pass": "puto",
         "rol": "admin",
         "baja": false,
         "perfilUser": {
-            "nombre": "Federico",
-            "apellido": "Alesandro",
-            "dni": "42454677"
+            "nombre": "Lombardo",
+            "apellido": "Eriksen",
+            "dni": "7012456"
         }
     }
 ]

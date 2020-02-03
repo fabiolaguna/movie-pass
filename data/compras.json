@@ -2,28 +2,64 @@
     {
         "idCompra": 1,
         "tarjetaCredito": 1,
-        "idCliente": 1,
-        "cantEntradas": "3",
-        "descuento": "0",
-        "fecha": "2019-11-21",
-        "total": "900"
+        "idCliente": null,
+        "cantEntradas": "1",
+        "descuento": "35",
+        "fecha": "2020-02-03",
+        "total": "105"
     },
     {
         "idCompra": 2,
         "tarjetaCredito": 2,
-        "idCliente": 1,
-        "cantEntradas": "2",
+        "idCliente": null,
+        "cantEntradas": "3",
         "descuento": "0",
-        "fecha": "2019-11-21",
-        "total": "600"
+        "fecha": "2020-02-03",
+        "total": "420"
     },
     {
         "idCompra": 3,
+        "tarjetaCredito": 1,
+        "idCliente": 2,
+        "cantEntradas": "3",
+        "descuento": "0",
+        "fecha": "2020-02-03",
+        "total": "420"
+    },
+    {
+        "idCompra": 4,
         "tarjetaCredito": 2,
-        "idCliente": 1,
-        "cantEntradas": "2",
-        "descuento": "150",
-        "fecha": "2019-11-21",
-        "total": "450"
+        "idCliente": 2,
+        "cantEntradas": "1",
+        "descuento": "0",
+        "fecha": "2020-02-03",
+        "total": "140"
+    },
+    {
+        "idCompra": 5,
+        "tarjetaCredito": 1,
+        "idCliente": 2,
+        "cantEntradas": "1",
+        "descuento": "0",
+        "fecha": "2020-02-03",
+        "total": "140"
+    },
+    {
+        "idCompra": 6,
+        "tarjetaCredito": 1,
+        "idCliente": 2,
+        "cantEntradas": "1",
+        "descuento": "0",
+        "fecha": "2020-02-03",
+        "total": "140"
+    },
+    {
+        "idCompra": 7,
+        "tarjetaCredito": 1,
+        "idCliente": 2,
+        "cantEntradas": "1",
+        "descuento": "37.5",
+        "fecha": "2020-02-03",
+        "total": "112.5"
     }
 ]

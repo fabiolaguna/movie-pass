@@ -27,7 +27,7 @@ if (empty(($_SESSION["cines"]))) {
                     $cine = controllers\CineController::readCine($idCine);
                     $direccion = $cine->getDireccion();
                     ?>
-                <p><strong>Id de cine a modificar:</strong> <?php echo ($cine->getIdCine() . "<br>Nombre: " . $cine->getNombre() . "<br>Capacidad: " . $cine->getCapacidadTotal() . "<br>Precio de entrada: " . $cine->getPrecioEntrada() . "<br>Provincia: " . $direccion->getProvincia() . "<br>Ciudad: " . $direccion->getCiudad() . "<br>Calle: " . $direccion->getCalle()  . "<br>Altura: " . $direccion->getAltura());  ?></p>
+                <p><strong>Id de cine a modificar:</strong> <?php echo ($cine->getIdCine() . "<br>Nombre: " . $cine->getNombre() . "<br>Capacidad: " . $cine->getCapacidadTotal() . "<br>Precio de entrada: $" . $cine->getPrecioEntrada() . "<br>Provincia: " . $direccion->getProvincia() . "<br>Ciudad: " . $direccion->getCiudad() . "<br>Calle: " . $direccion->getCalle()  . "<br>Altura: " . $direccion->getAltura());  ?></p>
 
                 <div class="form-group">
                     <input type="hidden" class="form-control" name="idCine" value="<?php echo ($idCine); ?>">

@@ -2,7 +2,7 @@
 
 namespace controllers;
 
-use daoDB\SalaDao as SalaDao;
+use daojson\SalaDao as SalaDao;
 use models\Sala as Sala;
 use controllers\CineController as CineController;
 
@@ -35,7 +35,7 @@ class SalaController
         if ($msg > 0)
             $msg = 'Sala agregada con exito';
         else
-            $msg = 'No se ha podido agregar la sala';
+            $msg = 'No se ha podido agregar la sala, sala ya existente en este cine.';
         $this->index($msg);
     }
     public function eliminarSala()

@@ -1,4 +1,6 @@
-    <?php
+<?php
+
+    use controllers\SalaController;
     $peliculaCartelera = $_SESSION["peliculaCartelera"];
     unset($_SESSION["peliculaCartelera"]); //Si se hace el unset, despues no se puede volver atras 
 
@@ -99,7 +101,8 @@
                 <div class="row">
                     <?php
                         $cant = count($peliculaCartelera["salas"]);
-                        for ($i = 0; $i < $cant; $i++) { ?>
+                        for ($i = 0; $i < $cant; $i++) {   ?>
+                        
                         <div class="col-md-4 col-sm-6 portfolio-item">
                             <div class="portfolio-caption">
                             </div>
@@ -125,10 +128,11 @@
                                 <?php
                                         $cantProyeccion = count($peliculaCartelera["proyecciones"]);
                                         for ($j = 0; $j < $cantProyeccion; $j++) {
-                                            if ($peliculaCartelera["salas"][$i]->getIdSala() == $peliculaCartelera["proyecciones"][$j]->getIdSala() && $peliculaCartelera["proyecciones"][$j]->getAsientosDisponibles() > 0) {
+                                            $sala = SalaController::readSala($peliculaCartelera["proyecciones"][$j]->getIdSala());                                            
+                                            if ($peliculaCartelera["salas"][$i]->getIdCine() == $sala->getIdCine() && $peliculaCartelera["proyecciones"][$j]->getAsientosDisponibles() > 0) {
                                                 $fechaHorario = $peliculaCartelera["proyecciones"][$j]->getFecha() . ", " . $peliculaCartelera["proyecciones"][$j]->getHorario();
                                                 echo ($fechaHorario); ?>
-                                        <a class="btn btn-primary btn-sm" style="border-radius: 20px;" href="<?php echo (FRONT_ROOT); ?>/compra/index?idProyeccion=<?php echo ($peliculaCartelera["proyecciones"][$j]->getIdProyeccion()); ?>">Comprar entrada </a>
+                                        <a class="btn btn-primary btn-sm" style="border-radius: 20px;" href="<?php echo (FRONT_ROOT); ?>/compra/index?idProyeccion=<?php echo ($peliculaCartelera["proyecciones"][$j]->getIdProyeccion()); ?>&idPelicula=<?php echo($_GET["idPelicula"]);?>">Comprar entrada </a>
                                         <br><br>
                                             <?php }
                                         } ?>
@@ -138,7 +142,7 @@
                 </div>
             </div>
         </div>
-    <?php } else {
+    <?php }  else {
         $msg = "Funciones agotadas";
     } ?>
     <div class="container">

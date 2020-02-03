@@ -2,10 +2,10 @@
 
 namespace controllers;
 
-use daoDB\CompraDao as CompraDao;
-use daoDB\EntradaDao as EntradaDao;
-use daoDB\Usuario as UsuarioDao;
-use daoDB\CineDao as CineDao;
+use daojson\CompraDao as CompraDao;
+use daojson\EntradaDao as EntradaDao;
+use daojson\Usuario as UsuarioDao;
+use daojson\CineDao as CineDao;
 
 class EntradaController
 {

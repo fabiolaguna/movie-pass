@@ -4,8 +4,8 @@ namespace daojson;
 
 use interfaces\IDao as IDao;
 use models\Sala as Sala;
-use daoDB\CineDao as CineDao;
-use daoDB\ProyeccionDao as ProyeccionDao;
+use daojson\CineDao as CineDao;
+use daojson\ProyeccionDao as ProyeccionDao;
 
 class SalaDao implements IDao
 {

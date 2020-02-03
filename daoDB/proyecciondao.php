@@ -10,9 +10,9 @@ use controllers\SalaController as SalaController;
 use controllers\PeliculaController as PeliculaController;
 
 
-require(ROOT . '/PHPMailer/src/Exception.php');
-require(ROOT . '/PHPMailer/src/PHPMailer.php');
-require(ROOT . '/PHPMailer/src/SMTP.php');
+require_once(ROOT . '/PHPMailer/src/Exception.php');
+require_once(ROOT . '/PHPMailer/src/PHPMailer.php');
+require_once(ROOT . '/PHPMailer/src/SMTP.php');
 
 class ProyeccionDao implements IDao
 {
@@ -343,7 +343,28 @@ class ProyeccionDao implements IDao
                     $mail->send();
                 }
             }
-        }       
+        } else
+        {
+            $entradaDao = new EntradaDao();
+            $entradas = $entradaDao->getAll();
+            $entradasEliminar = array();
+            if (!empty($entradas)) {
+                if (is_array($entradas)) {
+                    foreach ($entradas as $value) {
+                        if ($value->getIdProyeccion() == $idProyeccion)
+                            array_push($entradasEliminar, $value);
+                    }
+                } else {
+                    if ($entradas->getIdProyeccion() == $idProyeccion)
+                        array_push($entradasEliminar, $entradas);
+                }
+            }
+            if (!empty($entradasEliminar)) {
+                foreach ($entradasEliminar as $value) {
+                    $entradaDao->delete($value->getIdEntrada());
+                }
+            }       
+        }   
 
         $sql = "UPDATE proyecciones SET baja = true WHERE idProyeccion = $idProyeccion";
 

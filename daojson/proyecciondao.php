@@ -9,6 +9,11 @@ use models\Proyeccion as Proyeccion;
 use controllers\SalaController as SalaController;
 use controllers\PeliculaController as PeliculaController;
 
+
+require_once(ROOT . '/PHPMailer/src/Exception.php');
+require_once(ROOT . '/PHPMailer/src/PHPMailer.php');
+require_once(ROOT . '/PHPMailer/src/SMTP.php');
+
 class ProyeccionDao implements IDao
 {
     private $proyeccionesList = array();
@@ -69,10 +74,14 @@ class ProyeccionDao implements IDao
         }
         if (!$proyeccionExist) {
             $id = 0;
-            if ($this->proyeccionesList != null)
+            $cant = 0;
+            if ($this->proyeccionesList != null) {
                 $cant = count($this->proyeccionesList);
-            $id=$this->proyeccionesList[$cant-1]->getIdProyeccion();
-            $proyeccion->setIdProyeccion($id+1);
+                $id = $this->proyeccionesList[$cant - 1]->getIdProyeccion();
+            } else {
+                $id = 0;
+            }
+            $proyeccion->setIdProyeccion($id + 1);
             array_push($this->proyeccionesList, $proyeccion);
             $this->saveData();
             $successMje = 'Agregado con éxito';
@@ -164,16 +173,39 @@ class ProyeccionDao implements IDao
                     $mail->send();
                 }
             }
+        } else {
+            $entradaDao = new EntradaDao();
+            $entradas = $entradaDao->getAll();
+            $entradasEliminar = array();
+            if (!empty($entradas)) {
+                if (is_array($entradas)) {
+                    foreach ($entradas as $value) {
+                        if ($value->getIdProyeccion() == $idProyeccion)
+                            array_push($entradasEliminar, $value);
+                    }
+                } else {
+                    if ($entradas->getIdProyeccion() == $idProyeccion)
+                        array_push($entradasEliminar, $entradas);
+                }
+            }
+            if (!empty($entradasEliminar)) {
+                foreach ($entradasEliminar as $value) {
+                    $entradaDao->delete($value->getIdEntrada());
+                }
+            }
         }
 
         $this->proyeccionesList = array();
         $this->retrieveData();
-        $i = 0;
-        foreach ($this->proyeccionesList as $key => $proyeccion) {
-            if ($proyeccion->getIdProyeccion() == $idProyeccion)
-                unset($this->proyeccionesList[$key]);
+        $msg = null;
+        foreach ($this->proyeccionesList as $proyeccion) {
+            if ($proyeccion->getIdProyeccion() == $idProyeccion) {
+                $proyeccion->setBaja(true);
+                $msg = 1;
+            }
         }
         $this->saveData();
+        return $msg;
     }
 
     public function update($proyeccion, $idProyeccion)
@@ -290,6 +322,7 @@ class ProyeccionDao implements IDao
             $valuesArray["asientosOcupados"] = $proyeccion->getAsientosOcupados();
             $valuesArray["fecha"] = $proyeccion->getFecha();
             $valuesArray["horario"] = $proyeccion->getHorario();
+            $valuesArray["baja"] = $proyeccion->getBaja();
             array_push($arrayToEncode, $valuesArray);
         }
         $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
@@ -304,6 +337,7 @@ class ProyeccionDao implements IDao
             foreach ($arrayToDecode as $valuesArray) {
                 $proyeccion = new Proyeccion($valuesArray['idSala'], $valuesArray['idPelicula'], $valuesArray["asientosDisponibles"], $valuesArray["asientosOcupados"],  $valuesArray["fecha"], $valuesArray["horario"]);
                 $proyeccion->setIdProyeccion($valuesArray["idProyeccion"]);
+                $proyeccion->setBaja($valuesArray["baja"]);
                 array_push($this->proyeccionesList, $proyeccion);
             }
         }

@@ -27,6 +27,7 @@
             <br>
             <div class="modal-body">
                 <input type="hidden" name="idProyeccion" value="<?php echo ($idProyeccion); ?>">
+                <input type="hidden" name="idPelicula" value="<?php echo ($_GET["idPelicula"]); ?>">
                 <table class="table table-borderless" style="text-align:center;">
                     <thead class="">
                         <tr>
@@ -77,7 +78,7 @@
             </div>
             <div class="modal-footer">
                 <?php if (!isset($_GET["cantidadEntradas"]) || $_GET["cantidadEntradas"] == 0) { ?>
-                    <a style="border-radius: 20px" class="btn btn-danger" href="<?php echo (FRONT_ROOT); ?>/proyeccion/index">Volver</a>
+                    <a style="border-radius: 20px" class="btn btn-danger" href="<?php echo (FRONT_ROOT); ?>/proyeccion/index?action=volver&idPelicula=<?php echo($_GET["idPelicula"]);?>">Volver</a>
                 <?php } ?>
                 <button style="border-radius: 20px" type="submit" class="btn btn-primary"> Seleccionar </button>
             </div>
@@ -151,7 +152,7 @@
                         <input type="password" class="form-control col-sm-7" style="border-radius: 20px" name="codigoSeguridad" pattern="[0-9]{3}" maxlength="3" title="Ingrese los tres numeros que estan en el reverso de la tarjeta" required />
                     </div>
                     <div align="center">
-                        <a style="border-radius: 20px" class="btn btn-danger" href="<?php echo (FRONT_ROOT); ?>/proyeccion/index">Volver</a>
+                        <a style="border-radius: 20px" class="btn btn-danger" href="<?php echo (FRONT_ROOT); ?>/proyeccion/index?action=volver&idPelicula=<?php echo($_GET["idPelicula"]);?>">Volver</a>
                         <button style="border-radius: 20px" type="submit" class="btn btn-primary"> Finalizar </button>
                     </div>
                 </form>

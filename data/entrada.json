@@ -1,51 +1,10 @@
 [
     {
         "idEntrada": 1,
-        "idProyeccion": "1",
-        "idCliente": 1,
-        "idCompra": 1,
-        "codigoQR": "<img src=\"https:\/\/chart.googleapis.com\/chart?chs=300x300&cht=qr&chl=Puede ingresar al cine\" title=\"Acceso al cine\"\/>"
-    },
-    {
-        "idEntrada": 2,
-        "idProyeccion": "1",
-        "idCliente": 1,
-        "idCompra": 1,
-        "codigoQR": "<img src=\"https:\/\/chart.googleapis.com\/chart?chs=300x300&cht=qr&chl=Puede ingresar al cine\" title=\"Acceso al cine\"\/>"
-    },
-    {
-        "idEntrada": 3,
-        "idProyeccion": "1",
-        "idCliente": 1,
-        "idCompra": 1,
-        "codigoQR": "<img src=\"https:\/\/chart.googleapis.com\/chart?chs=300x300&cht=qr&chl=Puede ingresar al cine\" title=\"Acceso al cine\"\/>"
-    },
-    {
-        "idEntrada": 4,
-        "idProyeccion": "3",
-        "idCliente": 1,
-        "idCompra": 2,
-        "codigoQR": "<img src=\"https:\/\/chart.googleapis.com\/chart?chs=300x300&cht=qr&chl=Puede ingresar al cine\" title=\"Acceso al cine\"\/>"
-    },
-    {
-        "idEntrada": 5,
-        "idProyeccion": "3",
-        "idCliente": 1,
-        "idCompra": 2,
-        "codigoQR": "<img src=\"https:\/\/chart.googleapis.com\/chart?chs=300x300&cht=qr&chl=Puede ingresar al cine\" title=\"Acceso al cine\"\/>"
-    },
-    {
-        "idEntrada": 6,
-        "idProyeccion": "4",
-        "idCliente": 1,
-        "idCompra": 3,
-        "codigoQR": "<img src=\"https:\/\/chart.googleapis.com\/chart?chs=300x300&cht=qr&chl=Puede ingresar al cine\" title=\"Acceso al cine\"\/>"
-    },
-    {
-        "idEntrada": 7,
-        "idProyeccion": "4",
-        "idCliente": 1,
-        "idCompra": 3,
-        "codigoQR": "<img src=\"https:\/\/chart.googleapis.com\/chart?chs=300x300&cht=qr&chl=Puede ingresar al cine\" title=\"Acceso al cine\"\/>"
+        "idProyeccion": "5",
+        "idCliente": 2,
+        "idCompra": 7,
+        "codigoQR": "<img src=\"https:\/\/chart.googleapis.com\/chart?chs=300x300&cht=qr&chl=Puede ingresar al cine.  NRO DE ENTRADA:  - CINE: Alejandro - SALA: Sala Douwn - PELICULA: 1917 - PRECIO: 112.5 - FECHA: 2020-02-12 - HORARIO: 15:15\" title=\"Acceso al cine\"\/>",
+        "baja": true
     }
 ]

@@ -5,8 +5,8 @@ namespace daojson;
 use interfaces\IDao as IDao;
 use models\Cine as Cine;
 use models\Direccion as Direccion;
-use daoDB\Direccion as daoDireccion;
-use daoDB\SalaDao as salaDao;
+use daojson\Direccion as daoDireccion;
+use daojson\SalaDao as salaDao;
 
 class CineDao implements IDao
 {

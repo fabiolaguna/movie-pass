@@ -1,38 +1,42 @@
 [
     {
-        "idProyeccion": 1,
-        "idSala": "2",
-        "idPelicula": "474350",
-        "asientosDisponibles": 97,
-        "asientosOcupados": 3,
-        "fecha": "2019-11-22",
-        "horario": "20:30"
-    },
-    {
         "idProyeccion": 2,
         "idSala": "1",
-        "idPelicula": "474350",
-        "asientosDisponibles": "100",
-        "asientosOcupados": 0,
-        "fecha": "2019-11-23",
-        "horario": "20:00"
+        "idPelicula": "530915",
+        "asientosDisponibles": 113,
+        "asientosOcupados": 7,
+        "fecha": "2020-02-24",
+        "horario": "18:45",
+        "baja": true
     },
     {
         "idProyeccion": 3,
-        "idSala": "3",
-        "idPelicula": "330457",
-        "asientosDisponibles": 98,
-        "asientosOcupados": 2,
-        "fecha": "2019-11-25",
-        "horario": "19:15"
+        "idSala": "1",
+        "idPelicula": "530915",
+        "asientosDisponibles": 119,
+        "asientosOcupados": 1,
+        "fecha": "2020-02-23",
+        "horario": "14:45",
+        "baja": true
     },
     {
         "idProyeccion": 4,
-        "idSala": "3",
-        "idPelicula": "475557",
-        "asientosDisponibles": 98,
-        "asientosOcupados": 2,
-        "fecha": "2019-11-26",
-        "horario": "21:30"
+        "idSala": "1",
+        "idPelicula": "530915",
+        "asientosDisponibles": 119,
+        "asientosOcupados": 1,
+        "fecha": "2020-03-02",
+        "horario": "19:45",
+        "baja": true
+    },
+    {
+        "idProyeccion": 5,
+        "idSala": "2",
+        "idPelicula": "530915",
+        "asientosDisponibles": 84,
+        "asientosOcupados": 1,
+        "fecha": "2020-02-12",
+        "horario": "15:15",
+        "baja": true
     }
 ]

@@ -3,21 +3,49 @@
         "idPagoTC": 1,
         "idCompra": 1,
         "codigoAut": 1,
-        "fecha": "2019-11-21",
-        "total": "900"
+        "fecha": "2020-02-03",
+        "total": "105"
     },
     {
         "idPagoTC": 2,
         "idCompra": 2,
         "codigoAut": 1,
-        "fecha": "2019-11-21",
-        "total": "600"
+        "fecha": "2020-02-03",
+        "total": "420"
     },
     {
         "idPagoTC": 3,
         "idCompra": 3,
         "codigoAut": 1,
-        "fecha": "2019-11-21",
-        "total": "450"
+        "fecha": "2020-02-03",
+        "total": "420"
+    },
+    {
+        "idPagoTC": 4,
+        "idCompra": 4,
+        "codigoAut": 1,
+        "fecha": "2020-02-03",
+        "total": "140"
+    },
+    {
+        "idPagoTC": 5,
+        "idCompra": 5,
+        "codigoAut": 1,
+        "fecha": "2020-02-03",
+        "total": "140"
+    },
+    {
+        "idPagoTC": 6,
+        "idCompra": 6,
+        "codigoAut": 1,
+        "fecha": "2020-02-03",
+        "total": "140"
+    },
+    {
+        "idPagoTC": 7,
+        "idCompra": 7,
+        "codigoAut": 1,
+        "fecha": "2020-02-03",
+        "total": "112.5"
     }
 ]

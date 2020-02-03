@@ -2,17 +2,17 @@
     {
         "id": 1,
         "idDireccion": 1,
-        "nombre": "Ambassador",
-        "capacidad": 100,
-        "precio": "310",
+        "nombre": "Eduardo",
+        "capacidad": 0,
+        "precio": "140",
         "baja": false
     },
     {
         "id": 2,
         "idDireccion": 2,
-        "nombre": "Hoyts",
-        "capacidad": 200,
-        "precio": "300",
+        "nombre": "Alejandro",
+        "capacidad": 205,
+        "precio": "150",
         "baja": false
     }
 ]
