@@ -14,7 +14,7 @@ create table usuarios(
 	idUsuario int not null auto_increment,
     nombre varchar (30),
     apellido varchar (30),
-    dni int unique,
+    dni int,
     email varchar (45) unique,
     contrasenia varchar (40),
     rol varchar(8),
@@ -90,7 +90,7 @@ create table pagoTC(
     idCompra int,
     codigoAut int,
     fecha date,
-    total int,
+    total float,
     baja boolean,
     constraint pkIdPago primary key (idPagoTC),
     constraint fkIdCompra foreign key (idCompra) references compras (idCompra)
