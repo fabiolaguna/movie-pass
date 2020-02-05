@@ -8,11 +8,11 @@ use models\Compra as Compra;
 use models\Entrada as Entrada;
 use models\PagoTC;
 
-use daojson\CompraDao as CompraDao;
-use daojson\EntradaDao as EntradaDao;
-use daojson\PagoTCDao;
-use daojson\Usuario as UsuarioDao;
-use daojson\TarjetaCreditoDao as TarjetaCreditoDao;
+use daoDB\CompraDao as CompraDao;
+use daoDB\EntradaDao as EntradaDao;
+use daoDB\PagoTCDao;
+use daoDB\Usuario as UsuarioDao;
+use daoDB\TarjetaCreditoDao as TarjetaCreditoDao;
 
 require_once(ROOT . '/PHPMailer/src/Exception.php');
 require_once(ROOT . '/PHPMailer/src/PHPMailer.php');

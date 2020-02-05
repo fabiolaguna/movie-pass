@@ -2,7 +2,7 @@
 
 namespace controllers;
 
-use daojson\SalaDao as SalaDao;
+use daoDB\SalaDao as SalaDao;
 use models\Sala as Sala;
 use controllers\CineController as CineController;
 

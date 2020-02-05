@@ -3,7 +3,7 @@
 namespace controllers;
 
 use models\Proyeccion as Proyeccion;
-use daojson\ProyeccionDao as ProyeccionDao;
+use daoDB\ProyeccionDao as ProyeccionDao;
 use controllers\SalaController as SalaController;
 use models\Sala;
 

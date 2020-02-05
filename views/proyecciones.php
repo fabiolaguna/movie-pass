@@ -50,7 +50,7 @@
                                 unset($_SESSION["proyecciones"]);
                             }
                             if ($arrayProyecciones != null) {
-                                $entradaDao = new daojson\EntradaDao();
+                                $entradaDao = new daoDB\EntradaDao();
                                 $i = 0;
                                 $cantProyecciones = count($arrayProyecciones);
                                 while ($i < $cantProyecciones) {

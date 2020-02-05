@@ -2,7 +2,7 @@
 
 namespace controllers;
 
-use daojson\CineDao as CineDao;
+use daoDB\CineDao as CineDao;
 use models\Cine as Cine;
 use models\Direccion as Direccion;
 

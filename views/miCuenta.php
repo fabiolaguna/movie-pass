@@ -1,5 +1,5 @@
 <?php 
-    use daojson\Usuario as UserDao;
+    use daoDB\Usuario as UserDao;
     $userDao = new UserDao();
     $user = $userDao->read($_SESSION["loggedEmail"]);
     $perfilUser = $user->getPerfilUsuario();
