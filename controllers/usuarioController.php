@@ -4,7 +4,7 @@ namespace controllers;
 
 use models\Usuario as User;
 use models\PerfilUser as PerfilUser;
-use daoDB\Usuario as UserDao;
+use daojson\Usuario as UserDao;
 
 class UsuarioController
 {
@@ -96,7 +96,8 @@ class UsuarioController
             if ($msg == null)
                 $msg = "No se pudo agregar, usuario existente";
             else
-                $msg = "Agregado con exito";
+                if ($msg>0)
+                    $msg = "Agregado con exito";
         }else
         {
             $msg="No se pudo agregar, las contraseñas no coinciden";
