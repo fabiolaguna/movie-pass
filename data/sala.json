@@ -1,18 +1,26 @@
 [
     {
         "idSala": 1,
-        "idCine": "1",
-        "nombre": "Sala Dou",
-        "precio": "140",
-        "capacidadButacas": "120",
+        "idCine": "2",
+        "nombre": "Sala A",
+        "precio": "310",
+        "capacidadButacas": "100",
         "baja": false
     },
     {
         "idSala": 2,
+        "idCine": "1",
+        "nombre": "Sala A",
+        "precio": "300",
+        "capacidadButacas": "90",
+        "baja": false
+    },
+    {
+        "idSala": 3,
         "idCine": "2",
-        "nombre": "Sala Douwn",
-        "precio": "150",
-        "capacidadButacas": "85",
+        "nombre": "Sala B",
+        "precio": "310",
+        "capacidadButacas": "78",
         "baja": false
     }
 ]

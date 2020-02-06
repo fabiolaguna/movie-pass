@@ -37,7 +37,7 @@ class Usuario implements IDao
             $successMje = 'Agregado con éxito';
             return $successMje;
         } else {
-            $errorMje = 'No se pudo agregar porque ya existe';
+            $errorMje = 'No se pudo agregar, usuario existente';
             return $errorMje;
         }
     }
@@ -98,35 +98,43 @@ class Usuario implements IDao
     {
         $this->usersList = array();
         $this->retrieveData();
-        $i = 0;
-        $j = 0;
         $msg = null;
+        $userExist = null;
         foreach ($this->usersList as $value) {
-            if ($value->getEmail() == $email)
-                $j = $i;
-            $i++;
+            if (($value->getEmail() == $user->getEmail()) && ($user->getEmail() != $email))
+                $userExist = true;
         }
 
-        $perfilUser = $user->getPerfilUsuario();
+        if (!$userExist) {
+            $i = 0;
+            $j = 0;
+            foreach ($this->usersList as $value) {
+                if ($value->getEmail() == $email)
+                    $j = $i;
+                $i++;
+            }
 
-        if (isset($user) && !empty($user)) {
+            $perfilUser = $user->getPerfilUsuario();
 
-            if (($user->getEmail() != null) && !empty($user->getEmail()))
-                $this->usersList[$j]->setEmail($user->getEmail());
+            if (isset($user) && !empty($user)) {
 
-            if (($user->getContrasenia() != null) && !empty($user->getContrasenia()))
-                $this->usersList[$j]->setContrasenia($user->getContrasenia());
+                if (($user->getEmail() != null) && !empty($user->getEmail()))
+                    $this->usersList[$j]->setEmail($user->getEmail());
 
-            if (($perfilUser->getNombre() != null) && !empty($perfilUser->getNombre()))
-                $this->usersList[$j]->getPerfilUsuario()->setNombre($perfilUser->getNombre());
+                if (($user->getContrasenia() != null) && !empty($user->getContrasenia()))
+                    $this->usersList[$j]->setContrasenia($user->getContrasenia());
 
-            if (($perfilUser->getApellido() != null) && !empty($perfilUser->getApellido()))
-                $this->usersList[$j]->getPerfilUsuario()->setApellido($perfilUser->getApellido());
+                if (($perfilUser->getNombre() != null) && !empty($perfilUser->getNombre()))
+                    $this->usersList[$j]->getPerfilUsuario()->setNombre($perfilUser->getNombre());
 
-            if (($perfilUser->getDni() != null) && !empty($perfilUser->getDni()))
-                $this->usersList[$j]->getPerfilUsuario()->setDni($perfilUser->getDni());
+                if (($perfilUser->getApellido() != null) && !empty($perfilUser->getApellido()))
+                    $this->usersList[$j]->getPerfilUsuario()->setApellido($perfilUser->getApellido());
 
-            $msg = "Usuario modificado con exito";
+                if (($perfilUser->getDni() != null) && !empty($perfilUser->getDni()))
+                    $this->usersList[$j]->getPerfilUsuario()->setDni($perfilUser->getDni());
+
+                $msg = "Usuario modificado con exito";
+            }
         }
         $this->saveData();
         return $msg;

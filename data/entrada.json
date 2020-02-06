@@ -1,10 +1,26 @@
 [
     {
-        "idEntrada": 1,
-        "idProyeccion": "5",
+        "idEntrada": 3,
+        "idProyeccion": "1",
         "idCliente": 2,
-        "idCompra": 7,
-        "codigoQR": "<img src=\"https:\/\/chart.googleapis.com\/chart?chs=300x300&cht=qr&chl=Puede ingresar al cine.  NRO DE ENTRADA:  - CINE: Alejandro - SALA: Sala Douwn - PELICULA: 1917 - PRECIO: 112.5 - FECHA: 2020-02-12 - HORARIO: 15:15\" title=\"Acceso al cine\"\/>",
-        "baja": true
+        "idCompra": 2,
+        "codigoQR": "<img src=\"https:\/\/chart.googleapis.com\/chart?chs=300x300&cht=qr&chl=Puede ingresar al cine.  NRO DE ENTRADA: 2 - CINE: Ambassador - SALA: Sala B - PELICULA: Bad Boys for Life - PRECIO: 310 - FECHA: 2020-02-08 - HORARIO: 17:45\" title=\"Acceso al cine\"\/>",
+        "baja": false
+    },
+    {
+        "idEntrada": 4,
+        "idProyeccion": "1",
+        "idCliente": 2,
+        "idCompra": 2,
+        "codigoQR": "<img src=\"https:\/\/chart.googleapis.com\/chart?chs=300x300&cht=qr&chl=Puede ingresar al cine.  NRO DE ENTRADA: 3 - CINE: Ambassador - SALA: Sala B - PELICULA: Bad Boys for Life - PRECIO: 310 - FECHA: 2020-02-08 - HORARIO: 17:45\" title=\"Acceso al cine\"\/>",
+        "baja": false
+    },
+    {
+        "idEntrada": 5,
+        "idProyeccion": "1",
+        "idCliente": 2,
+        "idCompra": 2,
+        "codigoQR": "<img src=\"https:\/\/chart.googleapis.com\/chart?chs=300x300&cht=qr&chl=Puede ingresar al cine.  NRO DE ENTRADA: 4 - CINE: Ambassador - SALA: Sala B - PELICULA: Bad Boys for Life - PRECIO: 310 - FECHA: 2020-02-08 - HORARIO: 17:45\" title=\"Acceso al cine\"\/>",
+        "baja": false
     }
 ]

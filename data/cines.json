@@ -2,17 +2,17 @@
     {
         "id": 1,
         "idDireccion": 1,
-        "nombre": "Eduardo",
-        "capacidad": 0,
-        "precio": "140",
+        "nombre": "Cines del Paseo",
+        "capacidad": 90,
+        "precio": "300",
         "baja": false
     },
     {
         "id": 2,
         "idDireccion": 2,
-        "nombre": "Alejandro",
-        "capacidad": 205,
-        "precio": "150",
+        "nombre": "Ambassador",
+        "capacidad": 178,
+        "precio": "310",
         "baja": false
     }
 ]

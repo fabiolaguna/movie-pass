@@ -1,42 +1,22 @@
 [
     {
+        "idProyeccion": 1,
+        "idSala": "3",
+        "idPelicula": "38700",
+        "asientosDisponibles": 75,
+        "asientosOcupados": 3,
+        "fecha": "2020-02-08",
+        "horario": "17:45",
+        "baja": false
+    },
+    {
         "idProyeccion": 2,
-        "idSala": "1",
-        "idPelicula": "530915",
-        "asientosDisponibles": 113,
-        "asientosOcupados": 7,
-        "fecha": "2020-02-24",
-        "horario": "18:45",
-        "baja": true
-    },
-    {
-        "idProyeccion": 3,
-        "idSala": "1",
-        "idPelicula": "530915",
-        "asientosDisponibles": 119,
-        "asientosOcupados": 1,
-        "fecha": "2020-02-23",
-        "horario": "14:45",
-        "baja": true
-    },
-    {
-        "idProyeccion": 4,
-        "idSala": "1",
-        "idPelicula": "530915",
-        "asientosDisponibles": 119,
-        "asientosOcupados": 1,
-        "fecha": "2020-03-02",
-        "horario": "19:45",
-        "baja": true
-    },
-    {
-        "idProyeccion": 5,
         "idSala": "2",
-        "idPelicula": "530915",
-        "asientosDisponibles": 84,
-        "asientosOcupados": 1,
-        "fecha": "2020-02-12",
-        "horario": "15:15",
+        "idPelicula": "495764",
+        "asientosDisponibles": 88,
+        "asientosOcupados": 2,
+        "fecha": "2020-02-08",
+        "horario": "17:40",
         "baja": true
     }
 ]

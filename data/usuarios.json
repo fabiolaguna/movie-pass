@@ -46,5 +46,41 @@
             "apellido": "Eriksen",
             "dni": "7012456"
         }
+    },
+    {
+        "idUsuario": 5,
+        "email": "cj@gmail.com",
+        "pass": "123",
+        "rol": "cliente",
+        "baja": false,
+        "perfilUser": {
+            "nombre": "Juanga",
+            "apellido": "Quarleri",
+            "dni": "38057871"
+        }
+    },
+    {
+        "idUsuario": 6,
+        "email": "eeee@gmail.com",
+        "pass": "123",
+        "rol": "admin",
+        "baja": false,
+        "perfilUser": {
+            "nombre": "Fabio",
+            "apellido": "Laguna",
+            "dni": "38057871"
+        }
+    },
+    {
+        "idUsuario": 7,
+        "email": "fabiolaguna.4@gmail.com",
+        "pass": "111",
+        "rol": "admin",
+        "baja": false,
+        "perfilUser": {
+            "nombre": "Fabio",
+            "apellido": "Laguna",
+            "dni": "38057871"
+        }
     }
 ]

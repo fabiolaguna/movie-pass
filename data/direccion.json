@@ -1,16 +1,16 @@
 [
     {
         "idDireccion": 1,
-        "calle": "Golico",
-        "altura": "12",
-        "provincia": "Buenos Aires",
-        "ciudad": "Mar del Plata"
+        "calle": "1 de mayo ",
+        "altura": "222",
+        "provincia": "Santa Fe",
+        "ciudad": "Santa Fe"
     },
     {
         "idDireccion": 2,
-        "calle": "Elmo",
-        "altura": "181",
+        "calle": "C\u00f3rdoba",
+        "altura": "1674",
         "provincia": "Buenos Aires",
-        "ciudad": "Mar de las Pompas"
+        "ciudad": "Mar del Plata"
     }
 ]
