@@ -96,8 +96,8 @@ create table pagoTC(
     constraint fkIdCompra foreign key (idCompra) references compras (idCompra)
 );
 
-insert into usuarios (nombre, apellido, dni, email, contrasenia, rol, baja) values ('Federico', 'Alesandro', 42454677, 'fede.alesandro@gmail.com', 'fedecapo', 'admin', 0);
-insert into usuarios (nombre, apellido, dni, email, contrasenia, rol, baja) values ('Fabio', 'Laguna', 38057871, 'fabiolaguna.94@gmail.com', 'fabiocapo', 'cliente', 0);
+insert into usuarios (nombre, apellido, dni, email, contrasenia, rol, baja) values ('Federico', 'Alesandro', 42458977, 'fedealesandro@gmail.com', 'fede123', 'admin', 0);
+insert into usuarios (nombre, apellido, dni, email, contrasenia, rol, baja) values ('Fabio', 'Laguna', 38987871, 'fabiolaguna@gmail.com', 'fabio123', 'cliente', 0);
 insert into tarjetasCredito (nombreCompania, nroTarjeta, codigoSeguridad) values ('Visa', '1111111111111111', '111'), ('MasterCard', '2222222222222222', '222');
 
 /*
