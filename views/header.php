@@ -29,7 +29,7 @@
     <link href="<?php echo (ASSETS_PATH) ?>/css/agency.css" rel="stylesheet">
   <?php
     } else {
-      if ($_SERVER["REQUEST_URI"] == "/tpfinallabiv/home/index") {?>
+      if ($_SERVER["REQUEST_URI"] == "/movie-pass/home/index") {?>
         <link href="<?php echo (ASSETS_PATH) ?>/css/agency.css" rel="stylesheet">
       <?php } 
       else { ?>

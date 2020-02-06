@@ -172,7 +172,7 @@ img::-moz-selection {
 header.ventas {
   text-align: center;
   color: #fed136;
-  background-image: url("http://localhost/tpfinallabiv/assets/img/Global-Economy.jpg");
+  background-image: url("http://localhost/movie-pass/assets/img/Global-Economy.jpg");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center top;
@@ -224,7 +224,7 @@ header.ventas .intro-text .intro-heading {
 header.masthead {
   text-align: center;
   color: #fed136;
-  background-image: url("http://localhost/tpfinallabiv/assets/img/photo-1489599849927-2ee91cede3ba.jpg");
+  background-image: url("http://localhost/movie-pass/assets/img/photo-1489599849927-2ee91cede3ba.jpg");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center top;
@@ -276,7 +276,7 @@ header.masthead .intro-text .intro-heading {
 header.cineAdmin {
   text-align: center;
   color: #fed136;
-  background-image: url("http://localhost/tpfinallabiv/assets/img/netflix-cines-obsoletos.jpg");
+  background-image: url("http://localhost/movie-pass/assets/img/netflix-cines-obsoletos.jpg");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center bottom;

@@ -4,7 +4,7 @@
     }
 
     .modal-content {
-        background-image: url("http://localhost/tpfinallabiv/assets/img/login.jpg");
+        background-image: url("http://localhost/movie-pass/assets/img/login.jpg");
         background-position: bottom;
     }
 

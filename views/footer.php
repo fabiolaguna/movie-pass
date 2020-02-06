@@ -42,14 +42,14 @@
                         if (isset($_GET["cantidadEntradas"])) { ?>
                             <span style="color:white;" class="copyright">Copyright &copy; MoviePass</span>
                         <?php unset($_GET["cantidadEntradas"]); } else {
-                            if($_SERVER["REQUEST_URI"] == "/tpfinallabiv/entrada/index")
+                            if($_SERVER["REQUEST_URI"] == "/movie-pass/entrada/index")
                             {
                                 ?>
                                 <span style="color:white;" class="copyright">Copyright &copy; MoviePass</span>
                                 <?php
                             }else{
                                 if($_SESSION["loggedRole"]=='admin'){
-                                    if($_SERVER["REQUEST_URI"] == "/tpfinallabiv/home/index"){?>
+                                    if($_SERVER["REQUEST_URI"] == "/movie-pass/home/index"){?>
                                         <span style="color:black;" class="copyright">Copyright &copy; MoviePass</span>
                                 <?php } else{
                                      ?><span style="color:white;" class="copyright">Copyright &copy; MoviePass</span>
