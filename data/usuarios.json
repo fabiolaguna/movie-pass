@@ -8,7 +8,7 @@
         "perfilUser": {
             "nombre": "Federico",
             "apellido": "Alesandro",
-            "dni": "42454677"
+            "dni": "42123456"
         }
     },
     {
@@ -20,7 +20,7 @@
         "perfilUser": {
             "nombre": "Fabio",
             "apellido": "Laguna",
-            "dni": "38057871"
+            "dni": "38510211"
         }
     },
     {
@@ -32,19 +32,19 @@
         "perfilUser": {
             "nombre": "Juan",
             "apellido": "Gaston",
-            "dni": "1000000"
+            "dni": "40177898"
         }
     },
     {
         "idUsuario": 4,
-        "email": "laparastedepechocolorado@gmail.com",
-        "pass": "puto",
+        "email": "holaa@gmail.com",
+        "pass": "hola",
         "rol": "admin",
         "baja": false,
         "perfilUser": {
             "nombre": "Lombardo",
             "apellido": "Eriksen",
-            "dni": "7012456"
+            "dni": "31352268"
         }
     },
     {
@@ -54,9 +54,9 @@
         "rol": "cliente",
         "baja": false,
         "perfilUser": {
-            "nombre": "Juanga",
-            "apellido": "Quarleri",
-            "dni": "38057871"
+            "nombre": "Matias",
+            "apellido": "Garcia",
+            "dni": "35210300"
         }
     },
     {
@@ -66,21 +66,21 @@
         "rol": "admin",
         "baja": false,
         "perfilUser": {
-            "nombre": "Fabio",
-            "apellido": "Laguna",
-            "dni": "38057871"
+            "nombre": "Franco",
+            "apellido": "Lopez",
+            "dni": "45674239"
         }
     },
     {
         "idUsuario": 7,
-        "email": "fabiolaguna.4@gmail.com",
+        "email": "luquitas@gmail.com",
         "pass": "111",
         "rol": "admin",
         "baja": false,
         "perfilUser": {
-            "nombre": "Fabio",
-            "apellido": "Laguna",
-            "dni": "38057871"
+            "nombre": "Lucas",
+            "apellido": "Fernandez",
+            "dni": "37569871"
         }
     }
 ]
